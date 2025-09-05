@@ -98,6 +98,15 @@ def get_args_parser():
     parser.add_argument('--drop-prob', type=float, default=argparse.SUPPRESS, 
                         help='dropping rate in qdrop. set `drop-prob = 1.0` if do not use qdrop.')
     parser.add_argument('--pct', type=float, default=argparse.SUPPRESS, help='clamp percentile of mlp.fc2.')
+    
+    # Cluster affine correction parameters
+    parser.add_argument('--alpha-list', type=float, nargs='+', default=[0.5], 
+                        help='List of alpha values for blending (e.g., --alpha-list 0.3 0.5 0.7)')
+    parser.add_argument('--num-clusters-list', type=int, nargs='+', default=[64], 
+                        help='List of cluster numbers (e.g., --num-clusters-list 32 64 128)')
+    parser.add_argument('--pca-dim-list', type=int, nargs='+', default=[50], 
+                        help='List of PCA dimensions (e.g., --pca-dim-list 25 50 100)')
+    
     return parser
 
 
@@ -441,10 +450,10 @@ def main(args):
     all_corrected_list = [all_q]  # Use quantized as placeholder for corrected
     
     
-    # Determine parameter lists for testing
-    alpha_list = [0.5]
-    num_clusters_list = [64]
-    pca_dim_list = [50]
+    # Use command-line arguments for parameter lists
+    alpha_list = args.alpha_list
+    num_clusters_list = args.num_clusters_list
+    pca_dim_list = args.pca_dim_list
     
     print(f"Testing combinations:")
     print(f"  Alpha values: {alpha_list}")
