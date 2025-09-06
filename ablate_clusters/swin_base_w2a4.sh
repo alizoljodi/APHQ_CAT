@@ -11,5 +11,5 @@
 
 source /home/alz07xz/project/PD-Quant/pd_quant/bin/activate
 echo "Starting Swin-Base W2A4 cluster ablation experiment at $(date)"
-python run_script_seed.py --arch swin_base --w-bit 2 --a-bit 4 --seeds 1001 1002 1003 --sleep 0.5 --alpha-list 0.5 --num-clusters-list 1 8 16 24 32 40 48 56 64 72 80 88 96 104 112 120 128 136 144 152 160 168 176 184 192 200 208 216 224 232 240 248 256 --pca-dim-list 50
+python ../run_script_seed.py --arch swin_base --w-bit 2 --a-bit 4 --seeds 1001 1002 1003 --sleep 0.5 --alpha-list 0.5 --num-clusters-list 1 8 16 24 32 40 48 56 64 72 80 88 96 104 112 120 128 136 144 152 160 168 176 184 192 200 208 216 224 232 240 248 256 --pca-dim-list 50
 echo "Completed Swin-Base W2A4 cluster ablation experiment at $(date)"
