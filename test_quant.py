@@ -54,9 +54,9 @@ def get_args_parser():
                                  'deit_tiny', 'deit_small', 'deit_base', 
                                  'swin_tiny', 'swin_small', 'swin_base', 'swin_base_384'],
                         help="model")
-    parser.add_argument('--config', type=str, default="/mimer/NOBACKUP/groups/naiss2025-22-91/ali/APHQ-ViT/configs/4bit/best.py",
+    parser.add_argument('--config', type=str, default="./configs/4bit/best.py",
                         help="File path to import Config class from")
-    parser.add_argument('--dataset', default="/mimer/NOBACKUP/groups/naiss2025-22-91/imagenet",
+    parser.add_argument('--dataset', default="/home/alz07xz/imagenet",
                         help='path to dataset')
     parser.add_argument("--calib-size", default=argparse.SUPPRESS,
                         type=int, help="size of calibration set")
