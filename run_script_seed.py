@@ -126,6 +126,7 @@ def run_single_experiment(args, seed, output_dir):
     # Log command
     logging.info(f"Running experiment for seed {seed}")
     logging.info(f"Command: {cmd}")
+    logging.info(f"Working directory: {os.getcwd()}")
     
     # Run the command using os.system
     start_time = time.time()
@@ -136,11 +137,12 @@ def run_single_experiment(args, seed, output_dir):
     logging.info(f"Experiment for seed {seed} completed in {execution_time:.2f} seconds")
     
     if returncode == 0:
-        logging.info(f"Experiment for seed {seed} completed successfully")
-        return True, ""  # os.system doesn't capture output
+        logging.info(f"SUCCESS: Experiment for seed {seed} completed successfully")
+        return True, ""
     else:
-        logging.error(f"Experiment for seed {seed} failed with return code {returncode}")
-        return False, f"Process exited with code {returncode}"
+        error_msg = f"ERROR: Experiment for seed {seed} failed with return code {returncode}"
+        logging.error(error_msg)
+        return False, error_msg
 
 def parse_results_from_file(seed, args):
     """Parse results from saved files since os.system doesn't capture output"""
@@ -685,6 +687,28 @@ def analyze_results_comprehensive(all_results, all_baseline_results, args, outpu
     
     logging.info(f"\nComprehensive analysis saved to: {analysis_file}")
 
+def preflight_check(args):
+    """Simple pre-flight checks"""
+    logging.info("Checking basic requirements...")
+    
+    # Check if test_quant.py exists
+    if not os.path.exists('test_quant.py'):
+        logging.error(f"ERROR: test_quant.py not found in {os.getcwd()}")
+        return False
+    
+    # Check if config file exists
+    if not os.path.exists(args.config):
+        logging.error(f"ERROR: Config file not found: {args.config}")
+        return False
+    
+    # Check if dataset path exists
+    if not os.path.exists(args.dataset):
+        logging.error(f"ERROR: Dataset path not found: {args.dataset}")
+        return False
+    
+    logging.info("Basic checks passed")
+    return True
+
 def main():
     parser = get_args_parser()
     args = parser.parse_args()
@@ -715,6 +739,11 @@ def main():
     logging.info(f"PCA dimensions: {args.pca_dim_list}")
     logging.info(f"Output directory: {output_dir}")
     
+    # Perform pre-flight checks
+    if not preflight_check(args):
+        logging.error("ERROR: Pre-flight checks failed. Aborting experiment.")
+        return
+    
     # Run experiments for each seed
     all_results = {}
     all_baseline_results = {}  # Store baseline results separately
@@ -730,7 +759,7 @@ def main():
         logging.info(f"Running experiment {i+1}/{len(args.seeds)} for seed {seed}")
         logging.info(f"{'='*60}")
         
-        success, output = run_single_experiment(args, seed, output_dir)
+        success, error_msg = run_single_experiment(args, seed, output_dir)
         
         if success:
             successful_seeds.append(seed)
@@ -738,26 +767,12 @@ def main():
             results, baseline_results = parse_results_from_file(seed, args)
             all_results[seed] = results
             all_baseline_results[seed] = baseline_results
-            logging.info(f"✓ Seed {seed} completed successfully - Parsed {len(results)} reconstructed results, {len(baseline_results)} baseline results")
-            
-            # Log individual reconstructed results for this seed
-            if results:
-                logging.info(f"Reconstructed results for seed {seed}:")
-                for result in results:
-                    logging.info(f"  α={result['alpha']:.2f}, clusters={result['num_clusters']}, pca={result['pca_dim']}: "
-                               f"Top-1={result['top1_accuracy']:.2f}%, Top-5={result['top5_accuracy']:.2f}%")
-            
-            # Log individual baseline results for this seed
-            if baseline_results:
-                logging.info(f"Baseline results for seed {seed}:")
-                for result in baseline_results:
-                    logging.info(f"  α={result['alpha']:.2f}, clusters={result['num_clusters']}, pca={result['pca_dim']}: "
-                               f"Top-1={result['top1_accuracy']:.2f}%, Top-5={result['top5_accuracy']:.2f}%")
+            logging.info(f"Seed {seed} completed successfully")
         else:
             failed_seeds.append(seed)
             all_results[seed] = []
             all_baseline_results[seed] = []
-            logging.error(f"✗ Seed {seed} failed")
+            logging.error(f"Seed {seed} failed: {error_msg}")
         
         # Sleep between runs
         if i < len(args.seeds) - 1:  # Don't sleep after the last run
@@ -765,14 +780,16 @@ def main():
             time.sleep(args.sleep)
     
     logging.info(f"\n{'='*60}")
-    logging.info(f"EXPERIMENT EXECUTION SUMMARY")
+    logging.info(f"EXPERIMENT SUMMARY")
     logging.info(f"{'='*60}")
     logging.info(f"Successful seeds: {len(successful_seeds)}/{len(args.seeds)}")
     logging.info(f"Failed seeds: {len(failed_seeds)}/{len(args.seeds)}")
+    
     if successful_seeds:
-        logging.info(f"Successful seeds: {successful_seeds}")
+        logging.info(f"Successful: {successful_seeds}")
+    
     if failed_seeds:
-        logging.info(f"Failed seeds: {failed_seeds}")
+        logging.error(f"Failed: {failed_seeds}")
     
     # Save summary
     if args.save_summary:
