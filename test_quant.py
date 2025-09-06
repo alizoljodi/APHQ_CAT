@@ -69,16 +69,16 @@ def get_args_parser():
     parser.add_argument("--device", default="cuda", type=str, help="device")
 
     parser.add_argument('--reconstruct-mlp', action='store_true',default=False, help='reconstruct mlp with ReLU function.')
-    parser.add_argument('--load-reconstruct-checkpoint', type=str, default=None, help='Path to the reconstructed checkpoint.')
+    parser.add_argument('--load-reconstruct-checkpoint', type=str, default=False, help='Path to the reconstructed checkpoint.')
     parser.add_argument('--test-reconstruct-checkpoint', action='store_true', help='validate the reconstructed checkpoint.')
     
     calibrate_mode_group = parser.add_mutually_exclusive_group()
-    calibrate_mode_group.add_argument('--calibrate', action='store_true',default=True, help="Calibrate the model")
+    calibrate_mode_group.add_argument('--calibrate', action='store_true',default=False, help="Calibrate the model")
     calibrate_mode_group.add_argument('--load-calibrate-checkpoint', type=str, default=None, help="Path to the calibrated checkpoint.")
     parser.add_argument('--test-calibrate-checkpoint', action='store_true', help='validate the calibrated checkpoint.')
 
     optimize_mode_group = parser.add_mutually_exclusive_group()
-    optimize_mode_group.add_argument('--optimize', action='store_true',default=True, help="Optimize the model")
+    optimize_mode_group.add_argument('--optimize', action='store_true',default=False, help="Optimize the model")
     optimize_mode_group.add_argument('--load-optimize-checkpoint', type=str, default="", help="Path to the optimized checkpoint.")
     parser.add_argument('--test-optimize-checkpoint', action='store_true', help='validate the optimized checkpoint.')
 
@@ -312,8 +312,8 @@ def main(args):
 
         with torch.no_grad():
             for i, (images, _) in enumerate(dataloader):
-                #if i>=10:
-                #    break
+                if i>=10:
+                    break
                 images = images.to(device)
                 q_logits = q_model(images)
                 fp_logits = fp_model(images)
