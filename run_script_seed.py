@@ -59,7 +59,7 @@ def get_args_parser():
     
     # Other test_quant.py parameters
     parser.add_argument('--config', type=str, 
-                        default="./configs/4bit/best.py",
+                        default="./../configs/4bit/best.py",
                         help="File path to import Config class from")
     parser.add_argument('--dataset', default="/home/alz07xz/imagenet",
                         help='path to dataset')
