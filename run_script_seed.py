@@ -92,7 +92,7 @@ def run_single_experiment(args, seed, output_dir):
     
     # Create command string
     cmd_parts = [
-        sys.executable, 'test_quant.py',
+        sys.executable, '../test_quant.py',
         '--model', args.arch,
         '--w_bit', str(args.w_bit),
         '--a_bit', str(args.a_bit),
@@ -692,7 +692,7 @@ def preflight_check(args):
     logging.info("Checking basic requirements...")
     
     # Check if test_quant.py exists
-    if not os.path.exists('test_quant.py'):
+    if not os.path.exists('../test_quant.py'):
         logging.error(f"ERROR: test_quant.py not found in {os.getcwd()}")
         return False
     
