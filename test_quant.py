@@ -54,7 +54,7 @@ def get_args_parser():
                                  'deit_tiny', 'deit_small', 'deit_base', 
                                  'swin_tiny', 'swin_small', 'swin_base', 'swin_base_384'],
                         help="model")
-    parser.add_argument('--config', type=str, default="./configs/4bit/best.py",
+    parser.add_argument('--config', type=str, default="/home/alz07xz/project/APHQ_CAT/configs/4bit/best.py",
                         help="File path to import Config class from")
     parser.add_argument('--dataset', default="/home/alz07xz/imagenet",
                         help='path to dataset')
@@ -163,6 +163,7 @@ def main(args):
     logging.info("{} - start the process.".format(get_cur_time()))
     logging.info(str(args))
     dir_path = os.path.dirname(os.path.abspath(args.config))
+    print("deefe",dir_path)
     if dir_path not in sys.path:
         sys.path.append(dir_path)
     module_name = os.path.splitext(os.path.basename(args.config))[0]

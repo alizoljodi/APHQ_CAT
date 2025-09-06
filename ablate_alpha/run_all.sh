@@ -12,6 +12,7 @@ count=0
 
 # Loop through all .sh files except run_all.sh itself
 for script in *.sh; do
+    echo "$script"
     # Skip run_all.sh to avoid submitting itself
     if [ "$script" = "run_all.sh" ]; then
         continue
