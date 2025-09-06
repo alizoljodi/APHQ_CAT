@@ -61,7 +61,7 @@ def get_args_parser():
     parser.add_argument('--config', type=str, 
                         default="./configs/4bit/best.py",
                         help="File path to import Config class from")
-    parser.add_argument('--dataset', default="/mimer/NOBACKUP/groups/naiss2025-22-91/imagenet",
+    parser.add_argument('--dataset', default="/home/alz07xz/imagenet",
                         help='path to dataset')
     parser.add_argument('--calib-size', type=int, default=1000, help="size of calibration set")
     parser.add_argument('--calib-batch-size', type=int, default=32, help="batchsize of calibration set")
