@@ -1,0 +1,69 @@
+2025-09-08 15:04:28,668 - INFO - Starting multi-seed experiment
+2025-09-08 15:04:28,668 - INFO - Architecture: swin_small
+2025-09-08 15:04:28,668 - INFO - Weight bits: 2
+2025-09-08 15:04:28,668 - INFO - Activation bits: 2
+2025-09-08 15:04:28,668 - INFO - Seeds: [1001, 1002, 1003]
+2025-09-08 15:04:28,668 - INFO - Alpha values: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+2025-09-08 15:04:28,668 - INFO - Cluster numbers: [8, 16, 32, 64, 128, 256]
+2025-09-08 15:04:28,668 - INFO - PCA dimensions: [1, 25, 50, 75, 100, 125, 150, 175, 200, 220]
+2025-09-08 15:04:28,668 - INFO - Output directory: ./experiment_results/swin_small_w2_a2_20250908_150428
+2025-09-08 15:04:28,668 - INFO - Checking basic requirements...
+2025-09-08 15:04:28,668 - INFO - Basic checks passed
+2025-09-08 15:04:28,668 - INFO - 
+Starting experiments for 3 seeds...
+2025-09-08 15:04:28,668 - INFO - Total parameter combinations: 600
+2025-09-08 15:04:28,669 - INFO - Total experiments: 1800
+2025-09-08 15:04:28,669 - INFO - 
+============================================================
+2025-09-08 15:04:28,669 - INFO - Running experiment 1/3 for seed 1001
+2025-09-08 15:04:28,669 - INFO - ============================================================
+2025-09-08 15:04:28,669 - INFO - Running experiment for seed 1001
+2025-09-08 15:04:28,669 - INFO - Command: /home/alz07xz/project/PD-Quant/pd_quant/bin/python ../test_quant.py --model swin_small --w_bit 2 --a_bit 2 --seed 1001 --config ../configs/4bit/brecq_baseline.py --dataset /home/alz07xz/imagenet --calib-size 1000 --calib-batch-size 32 --val-batch-size 500 --num-workers 8 --device cuda --alpha-list 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 --num-clusters-list 8 16 32 64 128 256 --pca-dim-list 1 25 50 75 100 125 150 175 200 220 --calibrate --optimize
+2025-09-08 15:04:28,669 - INFO - Working directory: /home/alz07xz/project/APHQ_CAT/brecq_base
+2025-09-08 15:07:00 - start the process.
+Namespace(model='swin_small', config='../configs/4bit/brecq_baseline.py', dataset='/home/alz07xz/imagenet', val_batch_size=500, num_workers=8, device='cuda', reconstruct_mlp=False, load_reconstruct_checkpoint=False, test_reconstruct_checkpoint=False, calibrate=True, load_calibrate_checkpoint=None, test_calibrate_checkpoint=False, optimize=True, load_optimize_checkpoint='', test_optimize_checkpoint=False, print_freq=10, seed=1001, alpha_list=[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], num_clusters_list=[8, 16, 32, 64, 128, 256], pca_dim_list=[1, 25, 50, 75, 100, 125, 150, 175, 200, 220], w_bit=2, a_bit=2, calib_size=1000, calib_batch_size=32)
+Successfully imported Config class!
+optim_size: 1024
+calib_size: 1000
+optim_batch_size: 32
+calib_batch_size: 32
+w_bit: 2
+a_bit: 2
+qconv_a_bit: 8
+qhead_a_bit: 4
+calib_metric: mse
+matmul_head_channel_wise: True
+token_channel_wise: False
+eq_n: 128
+search_round: 3
+keep_gpu: True
+optim_metric: mse
+use_mean_hessian: False
+temp: 20
+recon_metric: hessian_perturb
+pct: 0.99
+optim_mode: rinp
+drop_prob: 1.0
+reconstruct_mlp: False
+Building model ...
+/home/alz07xz/project/PD-Quant/pd_quant/lib/python3.11/site-packages/torch/functional.py:554: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at /pytorch/aten/src/ATen/native/TensorShape.cpp:4314.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+No checkpoint found at './checkpoint/vit_raw/swin_small_patch4_window7_224.bin'
+Loading pretrained weights from Hugging Face hub (timm/swin_small_patch4_window7_224.ms_in22k_ft_in1k)
+[timm/swin_small_patch4_window7_224.ms_in22k_ft_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+Building validation dataloader ...
+Validating on test set on fp ...
+Test: [0/100]	Time 14.961 (14.961)	Loss 0.4363 (0.4363)	Prec@1 91.600 (91.600)	Prec@5 98.200 (98.200)
+Test: [10/100]	Time 1.297 (2.468)	Loss 0.4835 (0.5209)	Prec@1 90.200 (87.800)	Prec@5 98.400 (98.073)
+Test: [20/100]	Time 0.760 (1.834)	Loss 0.6876 (0.5743)	Prec@1 82.000 (86.400)	Prec@5 97.200 (97.743)
+Test: [30/100]	Time 0.764 (1.489)	Loss 0.5090 (0.6038)	Prec@1 88.000 (85.516)	Prec@5 99.200 (97.677)
+Test: [40/100]	Time 0.760 (1.311)	Loss 0.7823 (0.5960)	Prec@1 79.400 (85.780)	Prec@5 96.800 (97.741)
+Test: [50/100]	Time 0.762 (1.204)	Loss 0.9962 (0.6402)	Prec@1 76.000 (84.569)	Prec@5 93.200 (97.353)
+Test: [60/100]	Time 0.767 (1.132)	Loss 0.6332 (0.6450)	Prec@1 86.000 (84.538)	Prec@5 96.200 (97.285)
+Test: [70/100]	Time 0.769 (1.081)	Loss 0.7378 (0.6617)	Prec@1 82.200 (83.859)	Prec@5 97.600 (97.141)
+Test: [80/100]	Time 0.761 (1.042)	Loss 0.5519 (0.6669)	Prec@1 87.000 (83.805)	Prec@5 97.800 (97.030)
+Test: [90/100]	Time 0.763 (1.012)	Loss 1.0055 (0.6846)	Prec@1 74.800 (83.189)	Prec@5 94.400 (96.912)
+ * Prec@1 83.316 Prec@5 96.976 Loss 0.680 Time 99.092
+Wraping quantiztion modules (reparam: False, recon: False) ...
+2025-09-08 15:09:25 - start mse guided calibration
+  0%|          | 0/149 [00:00<?, ?it/s]calibrating patch_embed.proj:   0%|          | 0/149 [00:00<?, ?it/s]calibrating patch_embed.proj:   1%|          | 1/149 [00:11<27:11, 11.02s/it]calibrating layers.0.blocks.0.attn.qkv:   1%|          | 1/149 [00:11<27:11, 11.02s/it]calibrating layers.0.blocks.0.attn.qkv:   1%|▏         | 2/149 [01:06<1:31:46, 37.46s/it]calibrating layers.0.blocks.0.attn.proj:   1%|▏         | 2/149 [01:06<1:31:46, 37.46s/it]calibrating layers.0.blocks.0.attn.proj:   2%|▏         | 3/149 [01:31<1:16:51, 31.59s/it]calibrating layers.0.blocks.0.attn.matmul1:   2%|▏         | 3/149 [01:31<1:16:51, 31.59s/it]calibrating layers.0.blocks.0.attn.matmul1:   3%|▎         | 4/149 [04:37<3:43:30, 92.49s/it]calibrating layers.0.blocks.0.attn.matmul2:   3%|▎         | 4/149 [04:37<3:43:30, 92.49s/it]calibrating layers.0.blocks.0.attn.matmul2:   3%|▎         | 5/149 [09:54<6:56:41, 173.62s/it]calibrating layers.0.blocks.0.mlp.fc1:   3%|▎         | 5/149 [09:54<6:56:41, 173.62s/it]     slurmstepd-jnfat06: error: *** JOB 1643443 ON jnfat06 CANCELLED AT 2025-09-08T15:19:31 ***
