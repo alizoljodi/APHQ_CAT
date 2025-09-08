@@ -1,0 +1,1119 @@
+Starting ViT-Base W2A2 cluster ablation experiment at Mon Sep  8 02:04:29 AM CEST 2025
+2025-09-08 02:04:31,695 - INFO - Starting multi-seed experiment
+2025-09-08 02:04:31,695 - INFO - Architecture: vit_base
+2025-09-08 02:04:31,695 - INFO - Weight bits: 2
+2025-09-08 02:04:31,695 - INFO - Activation bits: 2
+2025-09-08 02:04:31,695 - INFO - Seeds: [1001, 1002, 1003]
+2025-09-08 02:04:31,695 - INFO - Alpha values: [0.5]
+2025-09-08 02:04:31,695 - INFO - Cluster numbers: [1, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256]
+2025-09-08 02:04:31,695 - INFO - PCA dimensions: [50]
+2025-09-08 02:04:31,695 - INFO - Output directory: ./experiment_results/vit_base_w2_a2_20250908_020431
+2025-09-08 02:04:31,695 - INFO - Checking basic requirements...
+2025-09-08 02:04:31,696 - INFO - Basic checks passed
+2025-09-08 02:04:31,696 - INFO - 
+Starting experiments for 3 seeds...
+2025-09-08 02:04:31,696 - INFO - Total parameter combinations: 33
+2025-09-08 02:04:31,696 - INFO - Total experiments: 99
+2025-09-08 02:04:31,696 - INFO - 
+============================================================
+2025-09-08 02:04:31,696 - INFO - Running experiment 1/3 for seed 1001
+2025-09-08 02:04:31,697 - INFO - ============================================================
+2025-09-08 02:04:31,697 - INFO - Running experiment for seed 1001
+2025-09-08 02:04:31,697 - INFO - Command: /home/alz07xz/project/PD-Quant/pd_quant/bin/python ../test_quant.py --model vit_base --w_bit 2 --a_bit 2 --seed 1001 --config ./../configs/4bit/best.py --dataset /home/alz07xz/imagenet --calib-size 1000 --calib-batch-size 32 --val-batch-size 500 --num-workers 8 --device cuda --alpha-list 0.5 --num-clusters-list 1 8 16 24 32 40 48 56 64 72 80 88 96 104 112 120 128 136 144 152 160 168 176 184 192 200 208 216 224 232 240 248 256 --pca-dim-list 50 --calibrate --optimize
+2025-09-08 02:04:31,697 - INFO - Working directory: /home/alz07xz/project/APHQ_CAT/ablate_clusters
+2025-09-08 02:04:58 - start the process.
+Namespace(model='vit_base', config='./../configs/4bit/best.py', dataset='/home/alz07xz/imagenet', val_batch_size=500, num_workers=8, device='cuda', reconstruct_mlp=False, load_reconstruct_checkpoint=False, test_reconstruct_checkpoint=False, calibrate=True, load_calibrate_checkpoint=None, test_calibrate_checkpoint=False, optimize=True, load_optimize_checkpoint='', test_optimize_checkpoint=False, print_freq=10, seed=1001, alpha_list=[0.5], num_clusters_list=[1, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256], pca_dim_list=[50], w_bit=2, a_bit=2, calib_size=1000, calib_batch_size=32)
+deefe /home/alz07xz/project/APHQ_CAT/configs/4bit
+Successfully imported Config class!
+optim_size: 1024
+calib_size: 1000
+optim_batch_size: 32
+calib_batch_size: 32
+w_bit: 2
+a_bit: 2
+qconv_a_bit: 8
+qhead_a_bit: 4
+calib_metric: mse
+matmul_head_channel_wise: True
+token_channel_wise: False
+eq_n: 128
+search_round: 3
+keep_gpu: True
+optim_metric: hessian_perturb
+use_mean_hessian: True
+temp: 20
+recon_metric: hessian_perturb
+pct: 0.98
+optim_mode: qdrop
+drop_prob: 0.5
+reconstruct_mlp: False
+Building model ...
+No checkpoint found at './checkpoint/vit_raw/vit_base_patch16_224.bin'
+Loading pretrained weights from Hugging Face hub (timm/vit_base_patch16_224.augreg2_in21k_ft_in1k)
+[timm/vit_base_patch16_224.augreg2_in21k_ft_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+Building validation dataloader ...
+Validating on test set on fp ...
+Test: [0/100]	Time 9.835 (9.835)	Loss 0.4459 (0.4459)	Prec@1 91.400 (91.400)	Prec@5 98.600 (98.600)
+Test: [10/100]	Time 0.774 (1.902)	Loss 0.4659 (0.5379)	Prec@1 90.800 (88.455)	Prec@5 98.600 (98.345)
+Test: [20/100]	Time 0.773 (1.559)	Loss 0.6057 (0.5588)	Prec@1 85.800 (88.124)	Prec@5 98.600 (98.095)
+Test: [30/100]	Time 0.777 (1.417)	Loss 0.5066 (0.5820)	Prec@1 89.800 (87.471)	Prec@5 99.600 (98.045)
+Test: [40/100]	Time 0.783 (1.261)	Loss 0.7571 (0.5772)	Prec@1 81.400 (87.532)	Prec@5 97.000 (98.088)
+Test: [50/100]	Time 0.792 (1.168)	Loss 1.0069 (0.6165)	Prec@1 77.000 (86.384)	Prec@5 95.200 (97.827)
+Test: [60/100]	Time 0.797 (1.106)	Loss 0.5700 (0.6205)	Prec@1 89.200 (86.285)	Prec@5 97.200 (97.751)
+Test: [70/100]	Time 0.784 (1.061)	Loss 0.7296 (0.6361)	Prec@1 83.800 (85.673)	Prec@5 97.400 (97.654)
+Test: [80/100]	Time 0.789 (1.028)	Loss 0.5101 (0.6392)	Prec@1 88.400 (85.605)	Prec@5 98.000 (97.580)
+Test: [90/100]	Time 0.786 (1.004)	Loss 0.9420 (0.6541)	Prec@1 75.000 (85.062)	Prec@5 95.800 (97.495)
+ * Prec@1 85.102 Prec@5 97.526 Loss 0.652 Time 103.087
+Wraping quantiztion modules (reparam: False, recon: False) ...
+2025-09-08 02:07:11 - start mse guided calibration
+  0%|          | 0/74 [00:00<?, ?it/s]calibrating patch_embed.proj:   0%|          | 0/74 [00:00<?, ?it/s]calibrating patch_embed.proj:   1%|▏         | 1/74 [00:11<14:19, 11.77s/it]calibrating blocks.0.attn.qkv:   1%|▏         | 1/74 [00:11<14:19, 11.77s/it]calibrating blocks.0.attn.qkv:   3%|▎         | 2/74 [01:25<57:39, 48.05s/it]calibrating blocks.0.attn.proj:   3%|▎         | 2/74 [01:25<57:39, 48.05s/it]calibrating blocks.0.attn.proj:   4%|▍         | 3/74 [01:50<44:31, 37.62s/it]calibrating blocks.0.attn.matmul1:   4%|▍         | 3/74 [01:50<44:31, 37.62s/it]calibrating blocks.0.attn.matmul1:   5%|▌         | 4/74 [03:01<59:28, 50.97s/it]calibrating blocks.0.attn.matmul2:   5%|▌         | 4/74 [03:01<59:28, 50.97s/it]calibrating blocks.0.attn.matmul2:   7%|▋         | 5/74 [04:02<1:02:40, 54.51s/it]calibrating blocks.0.mlp.fc1:   7%|▋         | 5/74 [04:02<1:02:40, 54.51s/it]     calibrating blocks.0.mlp.fc1:   8%|▊         | 6/74 [05:53<1:23:37, 73.79s/it]calibrating blocks.0.mlp.fc2:   8%|▊         | 6/74 [05:53<1:23:37, 73.79s/it]calibrating blocks.0.mlp.fc2:   9%|▉         | 7/74 [07:47<1:37:00, 86.88s/it]calibrating blocks.1.attn.qkv:   9%|▉         | 7/74 [07:47<1:37:00, 86.88s/it]calibrating blocks.1.attn.qkv:  11%|█         | 8/74 [09:02<1:31:12, 82.91s/it]calibrating blocks.1.attn.proj:  11%|█         | 8/74 [09:02<1:31:12, 82.91s/it]calibrating blocks.1.attn.proj:  12%|█▏        | 9/74 [09:27<1:10:30, 65.08s/it]calibrating blocks.1.attn.matmul1:  12%|█▏        | 9/74 [09:27<1:10:30, 65.08s/it]calibrating blocks.1.attn.matmul1:  14%|█▎        | 10/74 [10:39<1:11:33, 67.08s/it]calibrating blocks.1.attn.matmul2:  14%|█▎        | 10/74 [10:39<1:11:33, 67.08s/it]calibrating blocks.1.attn.matmul2:  15%|█▍        | 11/74 [11:40<1:08:25, 65.16s/it]calibrating blocks.1.mlp.fc1:  15%|█▍        | 11/74 [11:40<1:08:25, 65.16s/it]     calibrating blocks.1.mlp.fc1:  16%|█▌        | 12/74 [13:32<1:22:07, 79.48s/it]calibrating blocks.1.mlp.fc2:  16%|█▌        | 12/74 [13:32<1:22:07, 79.48s/it]calibrating blocks.1.mlp.fc2:  18%|█▊        | 13/74 [15:26<1:31:25, 89.92s/it]calibrating blocks.2.attn.qkv:  18%|█▊        | 13/74 [15:26<1:31:25, 89.92s/it]calibrating blocks.2.attn.qkv:  19%|█▉        | 14/74 [16:40<1:25:11, 85.19s/it]calibrating blocks.2.attn.proj:  19%|█▉        | 14/74 [16:40<1:25:11, 85.19s/it]calibrating blocks.2.attn.proj:  20%|██        | 15/74 [17:06<1:06:09, 67.28s/it]calibrating blocks.2.attn.matmul1:  20%|██        | 15/74 [17:06<1:06:09, 67.28s/it]calibrating blocks.2.attn.matmul1:  22%|██▏       | 16/74 [18:18<1:06:17, 68.57s/it]calibrating blocks.2.attn.matmul2:  22%|██▏       | 16/74 [18:18<1:06:17, 68.57s/it]calibrating blocks.2.attn.matmul2:  23%|██▎       | 17/74 [19:18<1:02:51, 66.17s/it]calibrating blocks.2.mlp.fc1:  23%|██▎       | 17/74 [19:18<1:02:51, 66.17s/it]     calibrating blocks.2.mlp.fc1:  24%|██▍       | 18/74 [21:11<1:14:49, 80.17s/it]calibrating blocks.2.mlp.fc2:  24%|██▍       | 18/74 [21:11<1:14:49, 80.17s/it]calibrating blocks.2.mlp.fc2:  26%|██▌       | 19/74 [23:06<1:22:59, 90.54s/it]calibrating blocks.3.attn.qkv:  26%|██▌       | 19/74 [23:06<1:22:59, 90.54s/it]calibrating blocks.3.attn.qkv:  27%|██▋       | 20/74 [24:21<1:17:22, 85.97s/it]calibrating blocks.3.attn.proj:  27%|██▋       | 20/74 [24:21<1:17:22, 85.97s/it]calibrating blocks.3.attn.proj:  28%|██▊       | 21/74 [24:47<59:58, 67.90s/it]  calibrating blocks.3.attn.matmul1:  28%|██▊       | 21/74 [24:47<59:58, 67.90s/it]calibrating blocks.3.attn.matmul1:  30%|██▉       | 22/74 [25:58<59:44, 68.94s/it]calibrating blocks.3.attn.matmul2:  30%|██▉       | 22/74 [25:58<59:44, 68.94s/it]calibrating blocks.3.attn.matmul2:  31%|███       | 23/74 [26:59<56:25, 66.37s/it]calibrating blocks.3.mlp.fc1:  31%|███       | 23/74 [26:59<56:25, 66.37s/it]     calibrating blocks.3.mlp.fc1:  32%|███▏      | 24/74 [28:51<1:06:47, 80.16s/it]calibrating blocks.3.mlp.fc2:  32%|███▏      | 24/74 [28:51<1:06:47, 80.16s/it]calibrating blocks.3.mlp.fc2:  34%|███▍      | 25/74 [30:45<1:13:52, 90.46s/it]calibrating blocks.4.attn.qkv:  34%|███▍      | 25/74 [30:45<1:13:52, 90.46s/it]calibrating blocks.4.attn.qkv:  35%|███▌      | 26/74 [32:00<1:08:40, 85.85s/it]calibrating blocks.4.attn.proj:  35%|███▌      | 26/74 [32:00<1:08:40, 85.85s/it]calibrating blocks.4.attn.proj:  36%|███▋      | 27/74 [32:27<53:13, 67.95s/it]  calibrating blocks.4.attn.matmul1:  36%|███▋      | 27/74 [32:27<53:13, 67.95s/it]calibrating blocks.4.attn.matmul1:  38%|███▊      | 28/74 [33:39<53:00, 69.14s/it]calibrating blocks.4.attn.matmul2:  38%|███▊      | 28/74 [33:39<53:00, 69.14s/it]calibrating blocks.4.attn.matmul2:  39%|███▉      | 29/74 [34:39<49:53, 66.53s/it]calibrating blocks.4.mlp.fc1:  39%|███▉      | 29/74 [34:39<49:53, 66.53s/it]     calibrating blocks.4.mlp.fc1:  41%|████      | 30/74 [36:32<58:54, 80.33s/it]calibrating blocks.4.mlp.fc2:  41%|████      | 30/74 [36:32<58:54, 80.33s/it]calibrating blocks.4.mlp.fc2:  42%|████▏     | 31/74 [38:26<1:04:52, 90.53s/it]calibrating blocks.5.attn.qkv:  42%|████▏     | 31/74 [38:26<1:04:52, 90.53s/it]calibrating blocks.5.attn.qkv:  43%|████▎     | 32/74 [39:40<59:59, 85.71s/it]  calibrating blocks.5.attn.proj:  43%|████▎     | 32/74 [39:40<59:59, 85.71s/it]calibrating blocks.5.attn.proj:  45%|████▍     | 33/74 [40:06<46:15, 67.68s/it]calibrating blocks.5.attn.matmul1:  45%|████▍     | 33/74 [40:06<46:15, 67.68s/it]calibrating blocks.5.attn.matmul1:  46%|████▌     | 34/74 [41:17<45:50, 68.77s/it]calibrating blocks.5.attn.matmul2:  46%|████▌     | 34/74 [41:17<45:50, 68.77s/it]calibrating blocks.5.attn.matmul2:  47%|████▋     | 35/74 [42:18<43:04, 66.28s/it]calibrating blocks.5.mlp.fc1:  47%|████▋     | 35/74 [42:18<43:04, 66.28s/it]     calibrating blocks.5.mlp.fc1:  49%|████▊     | 36/74 [44:10<50:39, 79.98s/it]calibrating blocks.5.mlp.fc2:  49%|████▊     | 36/74 [44:10<50:39, 79.98s/it]calibrating blocks.5.mlp.fc2:  50%|█████     | 37/74 [46:04<55:36, 90.18s/it]calibrating blocks.6.attn.qkv:  50%|█████     | 37/74 [46:04<55:36, 90.18s/it]calibrating blocks.6.attn.qkv:  51%|█████▏    | 38/74 [47:18<51:18, 85.51s/it]calibrating blocks.6.attn.proj:  51%|█████▏    | 38/74 [47:18<51:18, 85.51s/it]calibrating blocks.6.attn.proj:  53%|█████▎    | 39/74 [47:44<39:27, 67.64s/it]calibrating blocks.6.attn.matmul1:  53%|█████▎    | 39/74 [47:44<39:27, 67.64s/it]calibrating blocks.6.attn.matmul1:  54%|█████▍    | 40/74 [48:56<39:00, 68.83s/it]calibrating blocks.6.attn.matmul2:  54%|█████▍    | 40/74 [48:56<39:00, 68.83s/it]calibrating blocks.6.attn.matmul2:  55%|█████▌    | 41/74 [49:56<36:27, 66.30s/it]calibrating blocks.6.mlp.fc1:  55%|█████▌    | 41/74 [49:56<36:27, 66.30s/it]     calibrating blocks.6.mlp.fc1:  57%|█████▋    | 42/74 [51:49<42:47, 80.25s/it]calibrating blocks.6.mlp.fc2:  57%|█████▋    | 42/74 [51:49<42:47, 80.25s/it]calibrating blocks.6.mlp.fc2:  58%|█████▊    | 43/74 [53:43<46:45, 90.50s/it]calibrating blocks.7.attn.qkv:  58%|█████▊    | 43/74 [53:43<46:45, 90.50s/it]calibrating blocks.7.attn.qkv:  59%|█████▉    | 44/74 [54:58<42:53, 85.77s/it]calibrating blocks.7.attn.proj:  59%|█████▉    | 44/74 [54:58<42:53, 85.77s/it]calibrating blocks.7.attn.proj:  61%|██████    | 45/74 [55:24<32:47, 67.85s/it]calibrating blocks.7.attn.matmul1:  61%|██████    | 45/74 [55:24<32:47, 67.85s/it]calibrating blocks.7.attn.matmul1:  62%|██████▏   | 46/74 [56:36<32:11, 68.99s/it]calibrating blocks.7.attn.matmul2:  62%|██████▏   | 46/74 [56:36<32:11, 68.99s/it]calibrating blocks.7.attn.matmul2:  64%|██████▎   | 47/74 [57:36<29:55, 66.48s/it]calibrating blocks.7.mlp.fc1:  64%|██████▎   | 47/74 [57:36<29:55, 66.48s/it]     calibrating blocks.7.mlp.fc1:  65%|██████▍   | 48/74 [59:30<34:53, 80.50s/it]calibrating blocks.7.mlp.fc2:  65%|██████▍   | 48/74 [59:30<34:53, 80.50s/it]calibrating blocks.7.mlp.fc2:  66%|██████▌   | 49/74 [1:01:25<37:55, 91.03s/it]calibrating blocks.8.attn.qkv:  66%|██████▌   | 49/74 [1:01:25<37:55, 91.03s/it]calibrating blocks.8.attn.qkv:  68%|██████▊   | 50/74 [1:02:41<34:33, 86.40s/it]calibrating blocks.8.attn.proj:  68%|██████▊   | 50/74 [1:02:41<34:33, 86.40s/it]calibrating blocks.8.attn.proj:  69%|██████▉   | 51/74 [1:03:07<26:12, 68.37s/it]calibrating blocks.8.attn.matmul1:  69%|██████▉   | 51/74 [1:03:07<26:12, 68.37s/it]calibrating blocks.8.attn.matmul1:  70%|███████   | 52/74 [1:04:19<25:23, 69.27s/it]calibrating blocks.8.attn.matmul2:  70%|███████   | 52/74 [1:04:19<25:23, 69.27s/it]calibrating blocks.8.attn.matmul2:  72%|███████▏  | 53/74 [1:05:19<23:17, 66.56s/it]calibrating blocks.8.mlp.fc1:  72%|███████▏  | 53/74 [1:05:19<23:17, 66.56s/it]     calibrating blocks.8.mlp.fc1:  73%|███████▎  | 54/74 [1:07:11<26:47, 80.39s/it]calibrating blocks.8.mlp.fc2:  73%|███████▎  | 54/74 [1:07:11<26:47, 80.39s/it]calibrating blocks.8.mlp.fc2:  74%|███████▍  | 55/74 [1:09:07<28:45, 90.83s/it]calibrating blocks.9.attn.qkv:  74%|███████▍  | 55/74 [1:09:07<28:45, 90.83s/it]calibrating blocks.9.attn.qkv:  76%|███████▌  | 56/74 [1:10:22<25:53, 86.28s/it]calibrating blocks.9.attn.proj:  76%|███████▌  | 56/74 [1:10:22<25:53, 86.28s/it]calibrating blocks.9.attn.proj:  77%|███████▋  | 57/74 [1:10:49<19:21, 68.34s/it]calibrating blocks.9.attn.matmul1:  77%|███████▋  | 57/74 [1:10:49<19:21, 68.34s/it]calibrating blocks.9.attn.matmul1:  78%|███████▊  | 58/74 [1:12:01<18:31, 69.46s/it]calibrating blocks.9.attn.matmul2:  78%|███████▊  | 58/74 [1:12:01<18:31, 69.46s/it]calibrating blocks.9.attn.matmul2:  80%|███████▉  | 59/74 [1:13:02<16:43, 66.88s/it]calibrating blocks.9.mlp.fc1:  80%|███████▉  | 59/74 [1:13:02<16:43, 66.88s/it]     calibrating blocks.9.mlp.fc1:  81%|████████  | 60/74 [1:14:54<18:49, 80.65s/it]calibrating blocks.9.mlp.fc2:  81%|████████  | 60/74 [1:14:54<18:49, 80.65s/it]calibrating blocks.9.mlp.fc2:  82%|████████▏ | 61/74 [1:16:50<19:42, 90.98s/it]calibrating blocks.10.attn.qkv:  82%|████████▏ | 61/74 [1:16:50<19:42, 90.98s/it]calibrating blocks.10.attn.qkv:  84%|████████▍ | 62/74 [1:18:05<17:15, 86.31s/it]calibrating blocks.10.attn.proj:  84%|████████▍ | 62/74 [1:18:05<17:15, 86.31s/it]calibrating blocks.10.attn.proj:  85%|████████▌ | 63/74 [1:18:31<12:31, 68.34s/it]calibrating blocks.10.attn.matmul1:  85%|████████▌ | 63/74 [1:18:31<12:31, 68.34s/it]calibrating blocks.10.attn.matmul1:  86%|████████▋ | 64/74 [1:19:43<11:34, 69.42s/it]calibrating blocks.10.attn.matmul2:  86%|████████▋ | 64/74 [1:19:43<11:34, 69.42s/it]calibrating blocks.10.attn.matmul2:  88%|████████▊ | 65/74 [1:20:44<10:01, 66.82s/it]calibrating blocks.10.mlp.fc1:  88%|████████▊ | 65/74 [1:20:44<10:01, 66.82s/it]     calibrating blocks.10.mlp.fc1:  89%|████████▉ | 66/74 [1:22:37<10:45, 80.66s/it]calibrating blocks.10.mlp.fc2:  89%|████████▉ | 66/74 [1:22:37<10:45, 80.66s/it]calibrating blocks.10.mlp.fc2:  91%|█████████ | 67/74 [1:24:33<10:38, 91.16s/it]calibrating blocks.11.attn.qkv:  91%|█████████ | 67/74 [1:24:33<10:38, 91.16s/it]calibrating blocks.11.attn.qkv:  92%|█████████▏| 68/74 [1:25:49<08:39, 86.56s/it]calibrating blocks.11.attn.proj:  92%|█████████▏| 68/74 [1:25:49<08:39, 86.56s/it]calibrating blocks.11.attn.proj:  93%|█████████▎| 69/74 [1:26:15<05:42, 68.57s/it]calibrating blocks.11.attn.matmul1:  93%|█████████▎| 69/74 [1:26:15<05:42, 68.57s/it]calibrating blocks.11.attn.matmul1:  95%|█████████▍| 70/74 [1:27:27<04:38, 69.59s/it]calibrating blocks.11.attn.matmul2:  95%|█████████▍| 70/74 [1:27:27<04:38, 69.59s/it]calibrating blocks.11.attn.matmul2:  96%|█████████▌| 71/74 [1:28:28<03:21, 67.06s/it]calibrating blocks.11.mlp.fc1:  96%|█████████▌| 71/74 [1:28:28<03:21, 67.06s/it]     calibrating blocks.11.mlp.fc1:  97%|█████████▋| 72/74 [1:30:22<02:42, 81.00s/it]calibrating blocks.11.mlp.fc2:  97%|█████████▋| 72/74 [1:30:22<02:42, 81.00s/it]calibrating blocks.11.mlp.fc2:  99%|█████████▊| 73/74 [1:32:18<01:31, 91.42s/it]calibrating head:  99%|█████████▊| 73/74 [1:32:18<01:31, 91.42s/it]             calibrating head: 100%|██████████| 74/74 [1:32:21<00:00, 65.05s/it]calibrating head: 100%|██████████| 74/74 [1:32:21<00:00, 74.89s/it]
+2025-09-08 03:39:47 - mse guided calibration finished.
+Saving checkpoint to ./checkpoint/quant_result/20250908_0204/vit_base_w2_a2_calibsize_1000_mse.pth
+Validating after calibration ...
+Test: [0/100]	Time 4.892 (4.892)	Loss 7.1797 (7.1797)	Prec@1 0.000 (0.000)	Prec@5 0.600 (0.600)
+Test: [10/100]	Time 1.656 (1.954)	Loss 7.7699 (7.4457)	Prec@1 0.000 (0.000)	Prec@5 0.000 (0.291)
+Test: [20/100]	Time 1.662 (1.815)	Loss 7.2076 (7.4423)	Prec@1 0.000 (0.000)	Prec@5 0.200 (0.200)
+Test: [30/100]	Time 1.662 (1.766)	Loss 7.0881 (7.3579)	Prec@1 0.000 (0.006)	Prec@5 0.000 (0.561)
+Test: [40/100]	Time 1.663 (1.741)	Loss 7.2215 (7.3225)	Prec@1 0.000 (0.224)	Prec@5 1.400 (0.761)
+Test: [50/100]	Time 1.660 (1.727)	Loss 8.0196 (7.3069)	Prec@1 0.000 (0.180)	Prec@5 0.000 (0.745)
+Test: [60/100]	Time 1.668 (1.716)	Loss 7.7689 (7.3188)	Prec@1 0.000 (0.151)	Prec@5 0.000 (0.623)
+Test: [70/100]	Time 1.658 (1.708)	Loss 7.0037 (7.3070)	Prec@1 0.000 (0.130)	Prec@5 0.000 (0.572)
+Test: [80/100]	Time 1.660 (1.703)	Loss 7.2737 (7.3075)	Prec@1 0.000 (0.114)	Prec@5 1.200 (0.533)
+Test: [90/100]	Time 1.656 (1.698)	Loss 7.3711 (7.3063)	Prec@1 0.000 (0.101)	Prec@5 0.000 (0.479)
+ * Prec@1 0.092 Prec@5 0.524 Loss 7.307 Time 169.695
+Building calibrator ...
+2025-09-08 03:42:54 - start hessian_perturb guided block reconstruction
+reconstructing patch_embed ...
+initializing raw input and raw output ...
+initializing perturbation hessian ...
+adaround training for patch_embed ...
+wraping quantizers in patch_embed ...
+Total loss:	2.000 (rec:2.000, round:0.000)	b=0.00	count=1
+Total loss:	0.058 (rec:0.058, round:0.000)	b=0.00	count=500
+Total loss:	0.028 (rec:0.028, round:0.000)	b=0.00	count=1000
+Total loss:	0.022 (rec:0.022, round:0.000)	b=0.00	count=1500
+Total loss:	0.019 (rec:0.019, round:0.000)	b=0.00	count=2000
+Total loss:	0.021 (rec:0.021, round:0.000)	b=0.00	count=2500
+Total loss:	0.013 (rec:0.013, round:0.000)	b=0.00	count=3000
+Total loss:	0.014 (rec:0.014, round:0.000)	b=0.00	count=3500
+Total loss:	5557.085 (rec:0.015, round:5557.070)	b=20.00	count=4000
+Total loss:	2657.815 (rec:0.035, round:2657.781)	b=19.44	count=4500
+Total loss:	2445.488 (rec:0.039, round:2445.450)	b=18.88	count=5000
+Total loss:	2306.029 (rec:0.037, round:2305.991)	b=18.31	count=5500
+Total loss:	2184.766 (rec:0.015, round:2184.751)	b=17.75	count=6000
+Total loss:	2069.526 (rec:0.042, round:2069.484)	b=17.19	count=6500
+Total loss:	1955.332 (rec:0.036, round:1955.296)	b=16.62	count=7000
+Total loss:	1843.079 (rec:0.022, round:1843.058)	b=16.06	count=7500
+Total loss:	1725.580 (rec:0.037, round:1725.543)	b=15.50	count=8000
+Total loss:	1607.350 (rec:0.027, round:1607.323)	b=14.94	count=8500
+Total loss:	1486.050 (rec:0.025, round:1486.025)	b=14.38	count=9000
+Total loss:	1358.802 (rec:0.025, round:1358.777)	b=13.81	count=9500
+Total loss:	1232.841 (rec:0.025, round:1232.816)	b=13.25	count=10000
+Total loss:	1105.108 (rec:0.038, round:1105.070)	b=12.69	count=10500
+Total loss:	977.205 (rec:0.035, round:977.170)	b=12.12	count=11000
+Total loss:	845.898 (rec:0.027, round:845.871)	b=11.56	count=11500
+Total loss:	714.579 (rec:0.033, round:714.546)	b=11.00	count=12000
+Total loss:	588.087 (rec:0.039, round:588.049)	b=10.44	count=12500
+Total loss:	464.373 (rec:0.031, round:464.342)	b=9.88	count=13000
+Total loss:	349.580 (rec:0.042, round:349.537)	b=9.31	count=13500
+Total loss:	248.096 (rec:0.049, round:248.047)	b=8.75	count=14000
+Total loss:	166.441 (rec:0.067, round:166.374)	b=8.19	count=14500
+Total loss:	105.274 (rec:0.044, round:105.230)	b=7.62	count=15000
+Total loss:	62.433 (rec:0.101, round:62.332)	b=7.06	count=15500
+Total loss:	33.594 (rec:0.086, round:33.508)	b=6.50	count=16000
+Total loss:	16.443 (rec:0.094, round:16.349)	b=5.94	count=16500
+Total loss:	7.202 (rec:0.098, round:7.104)	b=5.38	count=17000
+Total loss:	3.046 (rec:0.100, round:2.946)	b=4.81	count=17500
+Total loss:	1.281 (rec:0.106, round:1.175)	b=4.25	count=18000
+Total loss:	0.523 (rec:0.203, round:0.320)	b=3.69	count=18500
+Total loss:	0.179 (rec:0.122, round:0.057)	b=3.12	count=19000
+Total loss:	0.111 (rec:0.103, round:0.008)	b=2.56	count=19500
+Total loss:	0.098 (rec:0.097, round:0.000)	b=2.00	count=20000
+finished reconstructing patch_embed.
+reconstructing blocks.0 ...
+initializing raw input and raw output ...
+initializing quanted input ...
+initializing perturbation hessian ...
+adaround training for blocks.0 ...
+wraping quantizers in blocks.0 ...
+Total loss:	2.000 (rec:2.000, round:0.000)	b=0.00	count=1
+Total loss:	0.510 (rec:0.510, round:0.000)	b=0.00	count=500
+Total loss:	0.321 (rec:0.321, round:0.000)	b=0.00	count=1000
+Total loss:	0.282 (rec:0.282, round:0.000)	b=0.00	count=1500
+Total loss:	0.262 (rec:0.262, round:0.000)	b=0.00	count=2000
+Total loss:	0.245 (rec:0.245, round:0.000)	b=0.00	count=2500
+Total loss:	0.212 (rec:0.212, round:0.000)	b=0.00	count=3000
+Total loss:	0.210 (rec:0.210, round:0.000)	b=0.00	count=3500
+Total loss:	62371.484 (rec:0.203, round:62371.281)	b=20.00	count=4000
+Total loss:	23447.490 (rec:0.202, round:23447.289)	b=19.44	count=4500
+Total loss:	21344.150 (rec:0.181, round:21343.969)	b=18.88	count=5000
+Total loss:	19920.881 (rec:0.200, round:19920.682)	b=18.31	count=5500
+Total loss:	18662.498 (rec:0.174, round:18662.324)	b=17.75	count=6000
+Total loss:	17480.082 (rec:0.191, round:17479.891)	b=17.19	count=6500
+Total loss:	16339.976 (rec:0.183, round:16339.792)	b=16.62	count=7000
+Total loss:	15236.853 (rec:0.190, round:15236.662)	b=16.06	count=7500
+Total loss:	14168.721 (rec:0.177, round:14168.544)	b=15.50	count=8000
+Total loss:	13138.038 (rec:0.163, round:13137.875)	b=14.94	count=8500
+Total loss:	12144.310 (rec:0.191, round:12144.119)	b=14.38	count=9000
+Total loss:	11179.185 (rec:0.171, round:11179.014)	b=13.81	count=9500
+Total loss:	10248.397 (rec:0.171, round:10248.226)	b=13.25	count=10000
+Total loss:	9349.346 (rec:0.175, round:9349.171)	b=12.69	count=10500
+Total loss:	8475.552 (rec:0.170, round:8475.382)	b=12.12	count=11000
+Total loss:	7621.935 (rec:0.173, round:7621.762)	b=11.56	count=11500
+Total loss:	6796.917 (rec:0.175, round:6796.742)	b=11.00	count=12000
+Total loss:	5996.627 (rec:0.160, round:5996.467)	b=10.44	count=12500
+Total loss:	5221.121 (rec:0.168, round:5220.953)	b=9.88	count=13000
+Total loss:	4480.653 (rec:0.171, round:4480.482)	b=9.31	count=13500
+Total loss:	3762.780 (rec:0.164, round:3762.616)	b=8.75	count=14000
+Total loss:	3076.911 (rec:0.183, round:3076.728)	b=8.19	count=14500
+Total loss:	2429.248 (rec:0.172, round:2429.076)	b=7.62	count=15000
+Total loss:	1829.947 (rec:0.175, round:1829.773)	b=7.06	count=15500
+Total loss:	1289.882 (rec:0.194, round:1289.688)	b=6.50	count=16000
+Total loss:	836.630 (rec:0.192, round:836.438)	b=5.94	count=16500
+Total loss:	488.308 (rec:0.183, round:488.125)	b=5.38	count=17000
+Total loss:	251.091 (rec:0.182, round:250.909)	b=4.81	count=17500
+Total loss:	106.499 (rec:0.179, round:106.320)	b=4.25	count=18000
+Total loss:	32.475 (rec:0.182, round:32.293)	b=3.69	count=18500
+Total loss:	5.807 (rec:0.176, round:5.630)	b=3.12	count=19000
+Total loss:	0.639 (rec:0.180, round:0.459)	b=2.56	count=19500
+Total loss:	0.186 (rec:0.179, round:0.007)	b=2.00	count=20000
+finished reconstructing blocks.0.
+reconstructing blocks.1 ...
+initializing raw input and raw output ...
+initializing quanted input ...
+initializing perturbation hessian ...
+adaround training for blocks.1 ...
+wraping quantizers in blocks.1 ...
+Total loss:	2.000 (rec:2.000, round:0.000)	b=0.00	count=1
+Total loss:	1.140 (rec:1.140, round:0.000)	b=0.00	count=500
+Total loss:	0.911 (rec:0.911, round:0.000)	b=0.00	count=1000
+Total loss:	0.864 (rec:0.864, round:0.000)	b=0.00	count=1500
+Total loss:	0.797 (rec:0.797, round:0.000)	b=0.00	count=2000
+Total loss:	0.750 (rec:0.750, round:0.000)	b=0.00	count=2500
+Total loss:	0.735 (rec:0.735, round:0.000)	b=0.00	count=3000
+Total loss:	0.760 (rec:0.760, round:0.000)	b=0.00	count=3500
+Total loss:	62222.836 (rec:0.697, round:62222.141)	b=20.00	count=4000
+Total loss:	25836.381 (rec:0.669, round:25835.713)	b=19.44	count=4500
+Total loss:	23486.834 (rec:0.666, round:23486.168)	b=18.88	count=5000
+Total loss:	21803.133 (rec:0.681, round:21802.451)	b=18.31	count=5500
+Total loss:	20282.473 (rec:0.663, round:20281.809)	b=17.75	count=6000
+Total loss:	18842.461 (rec:0.634, round:18841.826)	b=17.19	count=6500
+Total loss:	17464.895 (rec:0.672, round:17464.223)	b=16.62	count=7000
+Total loss:	16151.699 (rec:0.628, round:16151.071)	b=16.06	count=7500
+Total loss:	14893.043 (rec:0.635, round:14892.408)	b=15.50	count=8000
+Total loss:	13695.783 (rec:0.645, round:13695.139)	b=14.94	count=8500
+Total loss:	12561.141 (rec:0.641, round:12560.499)	b=14.38	count=9000
+Total loss:	11477.445 (rec:0.647, round:11476.798)	b=13.81	count=9500
+Total loss:	10453.008 (rec:0.626, round:10452.382)	b=13.25	count=10000
+Total loss:	9475.798 (rec:0.636, round:9475.162)	b=12.69	count=10500
+Total loss:	8547.515 (rec:0.603, round:8546.912)	b=12.12	count=11000
+Total loss:	7654.010 (rec:0.635, round:7653.375)	b=11.56	count=11500
+Total loss:	6806.270 (rec:0.648, round:6805.622)	b=11.00	count=12000
+Total loss:	5993.277 (rec:0.639, round:5992.638)	b=10.44	count=12500
+Total loss:	5217.009 (rec:0.639, round:5216.370)	b=9.88	count=13000
+Total loss:	4476.202 (rec:0.624, round:4475.578)	b=9.31	count=13500
+Total loss:	3771.253 (rec:0.627, round:3770.626)	b=8.75	count=14000
+Total loss:	3100.977 (rec:0.649, round:3100.328)	b=8.19	count=14500
+Total loss:	2465.112 (rec:0.611, round:2464.501)	b=7.62	count=15000
+Total loss:	1871.356 (rec:0.654, round:1870.702)	b=7.06	count=15500
+Total loss:	1316.558 (rec:0.647, round:1315.911)	b=6.50	count=16000
+Total loss:	789.258 (rec:0.650, round:788.608)	b=5.94	count=16500
+Total loss:	347.058 (rec:0.629, round:346.428)	b=5.38	count=17000
+Total loss:	124.672 (rec:0.636, round:124.036)	b=4.81	count=17500
+Total loss:	44.857 (rec:0.648, round:44.209)	b=4.25	count=18000
+Total loss:	13.460 (rec:0.630, round:12.830)	b=3.69	count=18500
+Total loss:	2.972 (rec:0.673, round:2.299)	b=3.12	count=19000
+Total loss:	0.854 (rec:0.664, round:0.190)	b=2.56	count=19500
+Total loss:	0.636 (rec:0.632, round:0.003)	b=2.00	count=20000
+finished reconstructing blocks.1.
+reconstructing blocks.2 ...
+initializing raw input and raw output ...
+initializing quanted input ...
+initializing perturbation hessian ...
+adaround training for blocks.2 ...
+wraping quantizers in blocks.2 ...
+Total loss:	2.000 (rec:2.000, round:0.000)	b=0.00	count=1
+Total loss:	1.232 (rec:1.232, round:0.000)	b=0.00	count=500
+Total loss:	1.120 (rec:1.120, round:0.000)	b=0.00	count=1000
+Total loss:	1.037 (rec:1.037, round:0.000)	b=0.00	count=1500
+Total loss:	0.964 (rec:0.964, round:0.000)	b=0.00	count=2000
+Total loss:	0.940 (rec:0.940, round:0.000)	b=0.00	count=2500
+Total loss:	0.875 (rec:0.875, round:0.000)	b=0.00	count=3000
+Total loss:	0.859 (rec:0.859, round:0.000)	b=0.00	count=3500
+Total loss:	62212.934 (rec:0.826, round:62212.109)	b=20.00	count=4000
+Total loss:	27254.479 (rec:0.826, round:27253.652)	b=19.44	count=4500
+Total loss:	24804.033 (rec:0.803, round:24803.230)	b=18.88	count=5000
+Total loss:	23044.494 (rec:0.783, round:23043.711)	b=18.31	count=5500
+Total loss:	21466.812 (rec:0.781, round:21466.031)	b=17.75	count=6000
+Total loss:	19989.145 (rec:0.767, round:19988.377)	b=17.19	count=6500
+Total loss:	18586.705 (rec:0.769, round:18585.936)	b=16.62	count=7000
+Total loss:	17258.930 (rec:0.765, round:17258.164)	b=16.06	count=7500
+Total loss:	15987.113 (rec:0.755, round:15986.357)	b=15.50	count=8000
+Total loss:	14773.696 (rec:0.753, round:14772.943)	b=14.94	count=8500
+Total loss:	13601.458 (rec:0.743, round:13600.715)	b=14.38	count=9000
+Total loss:	12487.097 (rec:0.740, round:12486.357)	b=13.81	count=9500
+Total loss:	11420.352 (rec:0.738, round:11419.613)	b=13.25	count=10000
+Total loss:	10395.210 (rec:0.754, round:10394.456)	b=12.69	count=10500
+Total loss:	9411.173 (rec:0.765, round:9410.407)	b=12.12	count=11000
+Total loss:	8465.317 (rec:0.751, round:8464.566)	b=11.56	count=11500
+Total loss:	7561.246 (rec:0.744, round:7560.502)	b=11.00	count=12000
+Total loss:	6692.346 (rec:0.756, round:6691.590)	b=10.44	count=12500
+Total loss:	5853.923 (rec:0.751, round:5853.172)	b=9.88	count=13000
+Total loss:	5047.037 (rec:0.737, round:5046.299)	b=9.31	count=13500
+Total loss:	4272.661 (rec:0.744, round:4271.917)	b=8.75	count=14000
+Total loss:	3532.677 (rec:0.765, round:3531.912)	b=8.19	count=14500
+Total loss:	2833.590 (rec:0.757, round:2832.833)	b=7.62	count=15000
+Total loss:	2170.994 (rec:0.767, round:2170.227)	b=7.06	count=15500
+Total loss:	1558.800 (rec:0.754, round:1558.046)	b=6.50	count=16000
+Total loss:	980.676 (rec:0.755, round:979.921)	b=5.94	count=16500
+Total loss:	447.602 (rec:0.757, round:446.844)	b=5.38	count=17000
+Total loss:	154.383 (rec:0.764, round:153.619)	b=4.81	count=17500
+Total loss:	55.574 (rec:0.758, round:54.816)	b=4.25	count=18000
+Total loss:	16.539 (rec:0.758, round:15.781)	b=3.69	count=18500
+Total loss:	3.511 (rec:0.754, round:2.757)	b=3.12	count=19000
+Total loss:	0.959 (rec:0.769, round:0.191)	b=2.56	count=19500
+Total loss:	0.766 (rec:0.764, round:0.002)	b=2.00	count=20000
+finished reconstructing blocks.2.
+reconstructing blocks.3 ...
+initializing raw input and raw output ...
+initializing quanted input ...
+initializing perturbation hessian ...
+adaround training for blocks.3 ...
+wraping quantizers in blocks.3 ...
+Total loss:	2.000 (rec:2.000, round:0.000)	b=0.00	count=1
+Total loss:	1.246 (rec:1.246, round:0.000)	b=0.00	count=500
+Total loss:	1.128 (rec:1.128, round:0.000)	b=0.00	count=1000
+Total loss:	1.063 (rec:1.063, round:0.000)	b=0.00	count=1500
+Total loss:	1.010 (rec:1.010, round:0.000)	b=0.00	count=2000
+Total loss:	0.994 (rec:0.994, round:0.000)	b=0.00	count=2500
+Total loss:	0.970 (rec:0.970, round:0.000)	b=0.00	count=3000
+Total loss:	0.936 (rec:0.936, round:0.000)	b=0.00	count=3500
+Total loss:	63134.926 (rec:0.910, round:63134.016)	b=20.00	count=4000
+Total loss:	28686.471 (rec:0.908, round:28685.562)	b=19.44	count=4500
+Total loss:	26302.510 (rec:0.888, round:26301.621)	b=18.88	count=5000
+Total loss:	24653.928 (rec:0.885, round:24653.043)	b=18.31	count=5500
+Total loss:	23199.445 (rec:0.891, round:23198.555)	b=17.75	count=6000
+Total loss:	21838.426 (rec:0.879, round:21837.547)	b=17.19	count=6500
+Total loss:	20529.385 (rec:0.869, round:20528.516)	b=16.62	count=7000
+Total loss:	19258.863 (rec:0.880, round:19257.982)	b=16.06	count=7500
+Total loss:	18019.371 (rec:0.860, round:18018.512)	b=15.50	count=8000
+Total loss:	16818.512 (rec:0.871, round:16817.641)	b=14.94	count=8500
+Total loss:	15648.035 (rec:0.865, round:15647.171)	b=14.38	count=9000
+Total loss:	14510.027 (rec:0.861, round:14509.166)	b=13.81	count=9500
+Total loss:	13399.467 (rec:0.856, round:13398.610)	b=13.25	count=10000
+Total loss:	12315.703 (rec:0.847, round:12314.856)	b=12.69	count=10500
+Total loss:	11254.185 (rec:0.850, round:11253.335)	b=12.12	count=11000
+Total loss:	10222.062 (rec:0.849, round:10221.213)	b=11.56	count=11500
+Total loss:	9210.278 (rec:0.852, round:9209.426)	b=11.00	count=12000
+Total loss:	8228.902 (rec:0.847, round:8228.056)	b=10.44	count=12500
+Total loss:	7271.115 (rec:0.855, round:7270.260)	b=9.88	count=13000
+Total loss:	6344.645 (rec:0.871, round:6343.773)	b=9.31	count=13500
+Total loss:	5445.149 (rec:0.865, round:5444.284)	b=8.75	count=14000
+Total loss:	4574.512 (rec:0.864, round:4573.648)	b=8.19	count=14500
+Total loss:	3736.206 (rec:0.866, round:3735.340)	b=7.62	count=15000
+Total loss:	2934.449 (rec:0.868, round:2933.581)	b=7.06	count=15500
+Total loss:	2173.686 (rec:0.868, round:2172.817)	b=6.50	count=16000
+Total loss:	1445.044 (rec:0.872, round:1444.172)	b=5.94	count=16500
+Total loss:	748.067 (rec:0.870, round:747.197)	b=5.38	count=17000
+Total loss:	292.535 (rec:0.872, round:291.663)	b=4.81	count=17500
+Total loss:	102.554 (rec:0.878, round:101.676)	b=4.25	count=18000
+Total loss:	25.451 (rec:0.858, round:24.593)	b=3.69	count=18500
+Total loss:	4.414 (rec:0.869, round:3.545)	b=3.12	count=19000
+Total loss:	1.150 (rec:0.881, round:0.269)	b=2.56	count=19500
+Total loss:	0.880 (rec:0.875, round:0.005)	b=2.00	count=20000
+finished reconstructing blocks.3.
+reconstructing blocks.4 ...
+initializing raw input and raw output ...
+initializing quanted input ...
+initializing perturbation hessian ...
+adaround training for blocks.4 ...
+wraping quantizers in blocks.4 ...
+Total loss:	2.000 (rec:2.000, round:0.000)	b=0.00	count=1
+Total loss:	1.256 (rec:1.256, round:0.000)	b=0.00	count=500
+Total loss:	1.131 (rec:1.131, round:0.000)	b=0.00	count=1000
+Total loss:	1.049 (rec:1.049, round:0.000)	b=0.00	count=1500
+Total loss:	1.018 (rec:1.018, round:0.000)	b=0.00	count=2000
+Total loss:	0.981 (rec:0.981, round:0.000)	b=0.00	count=2500
+Total loss:	0.958 (rec:0.958, round:0.000)	b=0.00	count=3000
+Total loss:	0.932 (rec:0.932, round:0.000)	b=0.00	count=3500
+Total loss:	63447.223 (rec:0.902, round:63446.320)	b=20.00	count=4000
+Total loss:	29305.021 (rec:0.877, round:29304.145)	b=19.44	count=4500
+Total loss:	26941.938 (rec:0.895, round:26941.043)	b=18.88	count=5000
+Total loss:	25329.518 (rec:0.865, round:25328.652)	b=18.31	count=5500
+Total loss:	23918.104 (rec:0.854, round:23917.250)	b=17.75	count=6000
+Total loss:	22590.207 (rec:0.859, round:22589.348)	b=17.19	count=6500
+Total loss:	21315.201 (rec:0.864, round:21314.338)	b=16.62	count=7000
+Total loss:	20077.393 (rec:0.847, round:20076.547)	b=16.06	count=7500
+Total loss:	18872.893 (rec:0.870, round:18872.023)	b=15.50	count=8000
+Total loss:	17687.645 (rec:0.836, round:17686.809)	b=14.94	count=8500
+Total loss:	16530.365 (rec:0.847, round:16529.518)	b=14.38	count=9000
+Total loss:	15392.127 (rec:0.826, round:15391.301)	b=13.81	count=9500
+Total loss:	14275.660 (rec:0.848, round:14274.812)	b=13.25	count=10000
+Total loss:	13179.159 (rec:0.833, round:13178.326)	b=12.69	count=10500
+Total loss:	12099.110 (rec:0.846, round:12098.265)	b=12.12	count=11000
+Total loss:	11043.156 (rec:0.832, round:11042.324)	b=11.56	count=11500
+Total loss:	10005.193 (rec:0.858, round:10004.336)	b=11.00	count=12000
+Total loss:	8980.167 (rec:0.834, round:8979.333)	b=10.44	count=12500
+Total loss:	7977.720 (rec:0.851, round:7976.869)	b=9.88	count=13000
+Total loss:	6991.744 (rec:0.833, round:6990.912)	b=9.31	count=13500
+Total loss:	6030.955 (rec:0.847, round:6030.107)	b=8.75	count=14000
+Total loss:	5098.332 (rec:0.856, round:5097.477)	b=8.19	count=14500
+Total loss:	4193.189 (rec:0.852, round:4192.337)	b=7.62	count=15000
+Total loss:	3321.551 (rec:0.828, round:3320.722)	b=7.06	count=15500
+Total loss:	2491.194 (rec:0.847, round:2490.347)	b=6.50	count=16000
+Total loss:	1691.325 (rec:0.841, round:1690.483)	b=5.94	count=16500
+Total loss:	902.428 (rec:0.852, round:901.577)	b=5.38	count=17000
+Total loss:	366.737 (rec:0.863, round:365.875)	b=4.81	count=17500
+Total loss:	142.507 (rec:0.842, round:141.665)	b=4.25	count=18000
+Total loss:	42.811 (rec:0.857, round:41.954)	b=3.69	count=18500
+Total loss:	7.143 (rec:0.856, round:6.287)	b=3.12	count=19000
+Total loss:	1.229 (rec:0.866, round:0.363)	b=2.56	count=19500
+Total loss:	0.876 (rec:0.869, round:0.007)	b=2.00	count=20000
+finished reconstructing blocks.4.
+reconstructing blocks.5 ...
+initializing raw input and raw output ...
+initializing quanted input ...
+initializing perturbation hessian ...
+adaround training for blocks.5 ...
+wraping quantizers in blocks.5 ...
+Total loss:	2.000 (rec:2.000, round:0.000)	b=0.00	count=1
+Total loss:	1.285 (rec:1.285, round:0.000)	b=0.00	count=500
+Total loss:	1.027 (rec:1.027, round:0.000)	b=0.00	count=1000
+Total loss:	0.922 (rec:0.922, round:0.000)	b=0.00	count=1500
+Total loss:	0.878 (rec:0.878, round:0.000)	b=0.00	count=2000
+Total loss:	0.847 (rec:0.847, round:0.000)	b=0.00	count=2500
+Total loss:	0.806 (rec:0.806, round:0.000)	b=0.00	count=3000
+Total loss:	0.791 (rec:0.791, round:0.000)	b=0.00	count=3500
+Total loss:	63381.828 (rec:0.761, round:63381.066)	b=20.00	count=4000
+Total loss:	29115.764 (rec:0.767, round:29114.996)	b=19.44	count=4500
+Total loss:	26782.287 (rec:0.733, round:26781.555)	b=18.88	count=5000
+Total loss:	25193.701 (rec:0.732, round:25192.969)	b=18.31	count=5500
+Total loss:	23793.031 (rec:0.733, round:23792.299)	b=17.75	count=6000
+Total loss:	22472.172 (rec:0.717, round:22471.455)	b=17.19	count=6500
+Total loss:	21202.777 (rec:0.719, round:21202.059)	b=16.62	count=7000
+Total loss:	19963.607 (rec:0.718, round:19962.889)	b=16.06	count=7500
+Total loss:	18752.979 (rec:0.705, round:18752.273)	b=15.50	count=8000
+Total loss:	17570.799 (rec:0.701, round:17570.098)	b=14.94	count=8500
+Total loss:	16416.311 (rec:0.698, round:16415.613)	b=14.38	count=9000
+Total loss:	15279.898 (rec:0.710, round:15279.188)	b=13.81	count=9500
+Total loss:	14167.693 (rec:0.707, round:14166.986)	b=13.25	count=10000
+Total loss:	13072.228 (rec:0.717, round:13071.510)	b=12.69	count=10500
+Total loss:	11993.175 (rec:0.704, round:11992.471)	b=12.12	count=11000
+Total loss:	10932.955 (rec:0.705, round:10932.250)	b=11.56	count=11500
+Total loss:	9891.567 (rec:0.685, round:9890.883)	b=11.00	count=12000
+Total loss:	8874.864 (rec:0.702, round:8874.162)	b=10.44	count=12500
+Total loss:	7874.891 (rec:0.705, round:7874.186)	b=9.88	count=13000
+Total loss:	6899.930 (rec:0.703, round:6899.228)	b=9.31	count=13500
+Total loss:	5947.244 (rec:0.702, round:5946.542)	b=8.75	count=14000
+Total loss:	5023.824 (rec:0.705, round:5023.120)	b=8.19	count=14500
+Total loss:	4128.050 (rec:0.705, round:4127.345)	b=7.62	count=15000
+Total loss:	3267.665 (rec:0.711, round:3266.955)	b=7.06	count=15500
+Total loss:	2440.865 (rec:0.700, round:2440.165)	b=6.50	count=16000
+Total loss:	1623.727 (rec:0.698, round:1623.029)	b=5.94	count=16500
+Total loss:	828.076 (rec:0.695, round:827.380)	b=5.38	count=17000
+Total loss:	338.430 (rec:0.715, round:337.715)	b=4.81	count=17500
+Total loss:	130.474 (rec:0.710, round:129.764)	b=4.25	count=18000
+Total loss:	37.749 (rec:0.704, round:37.045)	b=3.69	count=18500
+Total loss:	6.213 (rec:0.704, round:5.508)	b=3.12	count=19000
+Total loss:	1.073 (rec:0.709, round:0.364)	b=2.56	count=19500
+Total loss:	0.727 (rec:0.714, round:0.013)	b=2.00	count=20000
+finished reconstructing blocks.5.
+reconstructing blocks.6 ...
+initializing raw input and raw output ...
+initializing quanted input ...
+initializing perturbation hessian ...
+adaround training for blocks.6 ...
+wraping quantizers in blocks.6 ...
+Total loss:	2.000 (rec:2.000, round:0.000)	b=0.00	count=1
+Total loss:	1.456 (rec:1.456, round:0.000)	b=0.00	count=500
+Total loss:	1.214 (rec:1.214, round:0.000)	b=0.00	count=1000
+Total loss:	1.171 (rec:1.171, round:0.000)	b=0.00	count=1500
+Total loss:	0.977 (rec:0.977, round:0.000)	b=0.00	count=2000
+Total loss:	0.893 (rec:0.893, round:0.000)	b=0.00	count=2500
+Total loss:	0.853 (rec:0.853, round:0.000)	b=0.00	count=3000
+Total loss:	0.820 (rec:0.820, round:0.000)	b=0.00	count=3500
+Total loss:	62472.449 (rec:0.801, round:62471.648)	b=20.00	count=4000
+Total loss:	28169.752 (rec:0.802, round:28168.949)	b=19.44	count=4500
+Total loss:	25827.768 (rec:0.756, round:25827.012)	b=18.88	count=5000
+Total loss:	24221.174 (rec:0.768, round:24220.406)	b=18.31	count=5500
+Total loss:	22784.967 (rec:0.762, round:22784.205)	b=17.75	count=6000
+Total loss:	21443.211 (rec:0.748, round:21442.463)	b=17.19	count=6500
+Total loss:	20148.818 (rec:0.732, round:20148.086)	b=16.62	count=7000
+Total loss:	18897.213 (rec:0.741, round:18896.473)	b=16.06	count=7500
+Total loss:	17679.887 (rec:0.752, round:17679.135)	b=15.50	count=8000
+Total loss:	16497.189 (rec:0.720, round:16496.469)	b=14.94	count=8500
+Total loss:	15349.296 (rec:0.751, round:15348.545)	b=14.38	count=9000
+Total loss:	14223.738 (rec:0.752, round:14222.986)	b=13.81	count=9500
+Total loss:	13127.187 (rec:0.734, round:13126.452)	b=13.25	count=10000
+Total loss:	12071.950 (rec:0.722, round:12071.229)	b=12.69	count=10500
+Total loss:	11034.079 (rec:0.715, round:11033.364)	b=12.12	count=11000
+Total loss:	10023.997 (rec:0.730, round:10023.267)	b=11.56	count=11500
+Total loss:	9041.718 (rec:0.729, round:9040.988)	b=11.00	count=12000
+Total loss:	8082.084 (rec:0.739, round:8081.345)	b=10.44	count=12500
+Total loss:	7151.372 (rec:0.724, round:7150.648)	b=9.88	count=13000
+Total loss:	6244.303 (rec:0.738, round:6243.565)	b=9.31	count=13500
+Total loss:	5366.715 (rec:0.731, round:5365.984)	b=8.75	count=14000
+Total loss:	4508.948 (rec:0.740, round:4508.208)	b=8.19	count=14500
+Total loss:	3683.368 (rec:0.714, round:3682.654)	b=7.62	count=15000
+Total loss:	2893.385 (rec:0.744, round:2892.641)	b=7.06	count=15500
+Total loss:	2135.509 (rec:0.728, round:2134.780)	b=6.50	count=16000
+Total loss:	1417.659 (rec:0.747, round:1416.911)	b=5.94	count=16500
+Total loss:	777.059 (rec:0.755, round:776.304)	b=5.38	count=17000
+Total loss:	356.362 (rec:0.739, round:355.624)	b=4.81	count=17500
+Total loss:	146.666 (rec:0.732, round:145.933)	b=4.25	count=18000
+Total loss:	47.172 (rec:0.745, round:46.427)	b=3.69	count=18500
+Total loss:	9.413 (rec:0.741, round:8.672)	b=3.12	count=19000
+Total loss:	1.435 (rec:0.739, round:0.696)	b=2.56	count=19500
+Total loss:	0.749 (rec:0.730, round:0.019)	b=2.00	count=20000
+finished reconstructing blocks.6.
+reconstructing blocks.7 ...
+initializing raw input and raw output ...
+initializing quanted input ...
+initializing perturbation hessian ...
+adaround training for blocks.7 ...
+wraping quantizers in blocks.7 ...
+Total loss:	2.000 (rec:2.000, round:0.000)	b=0.00	count=1
+Total loss:	1.483 (rec:1.483, round:0.000)	b=0.00	count=500
+Total loss:	1.369 (rec:1.369, round:0.000)	b=0.00	count=1000
+Total loss:	1.351 (rec:1.351, round:0.000)	b=0.00	count=1500
+Total loss:	1.282 (rec:1.282, round:0.000)	b=0.00	count=2000
+Total loss:	1.199 (rec:1.199, round:0.000)	b=0.00	count=2500
+Total loss:	1.146 (rec:1.146, round:0.000)	b=0.00	count=3000
+Total loss:	1.144 (rec:1.144, round:0.000)	b=0.00	count=3500
+Total loss:	62573.777 (rec:1.082, round:62572.695)	b=20.00	count=4000
+Total loss:	28337.225 (rec:1.129, round:28336.096)	b=19.44	count=4500
+Total loss:	25897.902 (rec:1.105, round:25896.797)	b=18.88	count=5000
+Total loss:	24173.422 (rec:1.070, round:24172.352)	b=18.31	count=5500
+Total loss:	22641.137 (rec:1.043, round:22640.094)	b=17.75	count=6000
+Total loss:	21200.346 (rec:1.030, round:21199.314)	b=17.19	count=6500
+Total loss:	19823.682 (rec:1.010, round:19822.672)	b=16.62	count=7000
+Total loss:	18493.393 (rec:1.043, round:18492.350)	b=16.06	count=7500
+Total loss:	17223.309 (rec:1.043, round:17222.266)	b=15.50	count=8000
+Total loss:	15998.932 (rec:1.062, round:15997.869)	b=14.94	count=8500
+Total loss:	14811.295 (rec:0.995, round:14810.300)	b=14.38	count=9000
+Total loss:	13672.101 (rec:1.002, round:13671.099)	b=13.81	count=9500
+Total loss:	12578.112 (rec:0.991, round:12577.121)	b=13.25	count=10000
+Total loss:	11517.161 (rec:1.032, round:11516.129)	b=12.69	count=10500
+Total loss:	10495.265 (rec:1.017, round:10494.247)	b=12.12	count=11000
+Total loss:	9510.563 (rec:1.030, round:9509.533)	b=11.56	count=11500
+Total loss:	8561.547 (rec:0.991, round:8560.556)	b=11.00	count=12000
+Total loss:	7642.349 (rec:0.977, round:7641.372)	b=10.44	count=12500
+Total loss:	6750.091 (rec:1.009, round:6749.082)	b=9.88	count=13000
+Total loss:	5887.077 (rec:0.989, round:5886.087)	b=9.31	count=13500
+Total loss:	5056.302 (rec:1.012, round:5055.290)	b=8.75	count=14000
+Total loss:	4253.070 (rec:1.004, round:4252.066)	b=8.19	count=14500
+Total loss:	3478.292 (rec:1.002, round:3477.290)	b=7.62	count=15000
+Total loss:	2736.462 (rec:1.032, round:2735.429)	b=7.06	count=15500
+Total loss:	2035.579 (rec:1.010, round:2034.569)	b=6.50	count=16000
+Total loss:	1372.561 (rec:0.992, round:1371.569)	b=5.94	count=16500
+Total loss:	774.192 (rec:1.004, round:773.187)	b=5.38	count=17000
+Total loss:	335.682 (rec:1.002, round:334.679)	b=4.81	count=17500
+Total loss:	119.390 (rec:1.021, round:118.369)	b=4.25	count=18000
+Total loss:	34.282 (rec:0.989, round:33.293)	b=3.69	count=18500
+Total loss:	6.539 (rec:1.026, round:5.513)	b=3.12	count=19000
+Total loss:	1.395 (rec:1.002, round:0.393)	b=2.56	count=19500
+Total loss:	0.967 (rec:0.960, round:0.007)	b=2.00	count=20000
+finished reconstructing blocks.7.
+reconstructing blocks.8 ...
+initializing raw input and raw output ...
+initializing quanted input ...
+initializing perturbation hessian ...
+adaround training for blocks.8 ...
+wraping quantizers in blocks.8 ...
+Total loss:	2.000 (rec:2.000, round:0.000)	b=0.00	count=1
+Total loss:	1.515 (rec:1.515, round:0.000)	b=0.00	count=500
+Total loss:	1.466 (rec:1.466, round:0.000)	b=0.00	count=1000
+Total loss:	1.418 (rec:1.418, round:0.000)	b=0.00	count=1500
+Total loss:	1.330 (rec:1.330, round:0.000)	b=0.00	count=2000
+Total loss:	1.338 (rec:1.338, round:0.000)	b=0.00	count=2500
+Total loss:	1.293 (rec:1.293, round:0.000)	b=0.00	count=3000
+Total loss:	1.230 (rec:1.230, round:0.000)	b=0.00	count=3500
+Total loss:	63477.113 (rec:1.269, round:63475.844)	b=20.00	count=4000
+Total loss:	29451.377 (rec:1.205, round:29450.172)	b=19.44	count=4500
+Total loss:	27056.256 (rec:1.198, round:27055.059)	b=18.88	count=5000
+Total loss:	25390.586 (rec:1.199, round:25389.387)	b=18.31	count=5500
+Total loss:	23912.463 (rec:1.182, round:23911.281)	b=17.75	count=6000
+Total loss:	22514.955 (rec:1.151, round:22513.805)	b=17.19	count=6500
+Total loss:	21169.363 (rec:1.144, round:21168.219)	b=16.62	count=7000
+Total loss:	19869.381 (rec:1.123, round:19868.258)	b=16.06	count=7500
+Total loss:	18608.891 (rec:1.194, round:18607.697)	b=15.50	count=8000
+Total loss:	17376.871 (rec:1.144, round:17375.727)	b=14.94	count=8500
+Total loss:	16176.414 (rec:1.144, round:16175.270)	b=14.38	count=9000
+Total loss:	15002.620 (rec:1.143, round:15001.477)	b=13.81	count=9500
+Total loss:	13864.579 (rec:1.117, round:13863.462)	b=13.25	count=10000
+Total loss:	12761.778 (rec:1.138, round:12760.641)	b=12.69	count=10500
+Total loss:	11689.763 (rec:1.116, round:11688.647)	b=12.12	count=11000
+Total loss:	10637.545 (rec:1.118, round:10636.427)	b=11.56	count=11500
+Total loss:	9614.278 (rec:1.146, round:9613.133)	b=11.00	count=12000
+Total loss:	8621.697 (rec:1.103, round:8620.594)	b=10.44	count=12500
+Total loss:	7653.053 (rec:1.135, round:7651.918)	b=9.88	count=13000
+Total loss:	6714.234 (rec:1.124, round:6713.110)	b=9.31	count=13500
+Total loss:	5804.050 (rec:1.179, round:5802.871)	b=8.75	count=14000
+Total loss:	4926.609 (rec:1.110, round:4925.499)	b=8.19	count=14500
+Total loss:	4081.227 (rec:1.164, round:4080.062)	b=7.62	count=15000
+Total loss:	3273.030 (rec:1.165, round:3271.864)	b=7.06	count=15500
+Total loss:	2514.215 (rec:1.090, round:2513.125)	b=6.50	count=16000
+Total loss:	1808.416 (rec:1.098, round:1807.318)	b=5.94	count=16500
+Total loss:	1174.736 (rec:1.184, round:1173.552)	b=5.38	count=17000
+Total loss:	647.177 (rec:1.091, round:646.087)	b=4.81	count=17500
+Total loss:	268.261 (rec:1.140, round:267.121)	b=4.25	count=18000
+Total loss:	68.603 (rec:1.135, round:67.468)	b=3.69	count=18500
+Total loss:	9.100 (rec:1.143, round:7.957)	b=3.12	count=19000
+Total loss:	1.637 (rec:1.178, round:0.459)	b=2.56	count=19500
+Total loss:	1.170 (rec:1.147, round:0.023)	b=2.00	count=20000
+finished reconstructing blocks.8.
+reconstructing blocks.9 ...
+initializing raw input and raw output ...
+initializing quanted input ...
+initializing perturbation hessian ...
+adaround training for blocks.9 ...
+wraping quantizers in blocks.9 ...
+Total loss:	2.000 (rec:2.000, round:0.000)	b=0.00	count=1
+Total loss:	1.791 (rec:1.791, round:0.000)	b=0.00	count=500
+Total loss:	1.632 (rec:1.632, round:0.000)	b=0.00	count=1000
+Total loss:	1.575 (rec:1.575, round:0.000)	b=0.00	count=1500
+Total loss:	1.534 (rec:1.534, round:0.000)	b=0.00	count=2000
+Total loss:	1.437 (rec:1.437, round:0.000)	b=0.00	count=2500
+Total loss:	1.426 (rec:1.426, round:0.000)	b=0.00	count=3000
+Total loss:	1.452 (rec:1.452, round:0.000)	b=0.00	count=3500
+Total loss:	64459.906 (rec:1.352, round:64458.555)	b=20.00	count=4000
+Total loss:	30483.590 (rec:1.337, round:30482.254)	b=19.44	count=4500
+Total loss:	28096.242 (rec:1.391, round:28094.852)	b=18.88	count=5000
+Total loss:	26465.584 (rec:1.353, round:26464.230)	b=18.31	count=5500
+Total loss:	25021.607 (rec:1.275, round:25020.332)	b=17.75	count=6000
+Total loss:	23651.250 (rec:1.291, round:23649.959)	b=17.19	count=6500
+Total loss:	22326.021 (rec:1.278, round:22324.742)	b=16.62	count=7000
+Total loss:	21035.223 (rec:1.271, round:21033.951)	b=16.06	count=7500
+Total loss:	19775.197 (rec:1.244, round:19773.953)	b=15.50	count=8000
+Total loss:	18535.139 (rec:1.284, round:18533.855)	b=14.94	count=8500
+Total loss:	17324.246 (rec:1.276, round:17322.971)	b=14.38	count=9000
+Total loss:	16129.167 (rec:1.281, round:16127.887)	b=13.81	count=9500
+Total loss:	14956.968 (rec:1.233, round:14955.735)	b=13.25	count=10000
+Total loss:	13809.775 (rec:1.287, round:13808.488)	b=12.69	count=10500
+Total loss:	12682.338 (rec:1.214, round:12681.124)	b=12.12	count=11000
+Total loss:	11578.275 (rec:1.212, round:11577.063)	b=11.56	count=11500
+Total loss:	10496.578 (rec:1.259, round:10495.319)	b=11.00	count=12000
+Total loss:	9441.807 (rec:1.219, round:9440.588)	b=10.44	count=12500
+Total loss:	8410.896 (rec:1.255, round:8409.642)	b=9.88	count=13000
+Total loss:	7405.985 (rec:1.240, round:7404.745)	b=9.31	count=13500
+Total loss:	6427.747 (rec:1.217, round:6426.530)	b=8.75	count=14000
+Total loss:	5480.215 (rec:1.233, round:5478.982)	b=8.19	count=14500
+Total loss:	4563.323 (rec:1.207, round:4562.116)	b=7.62	count=15000
+Total loss:	3684.328 (rec:1.233, round:3683.095)	b=7.06	count=15500
+Total loss:	2851.280 (rec:1.233, round:2850.047)	b=6.50	count=16000
+Total loss:	2082.524 (rec:1.272, round:2081.252)	b=5.94	count=16500
+Total loss:	1389.391 (rec:1.249, round:1388.142)	b=5.38	count=17000
+Total loss:	802.745 (rec:1.265, round:801.480)	b=4.81	count=17500
+Total loss:	360.136 (rec:1.232, round:358.903)	b=4.25	count=18000
+Total loss:	102.908 (rec:1.265, round:101.643)	b=3.69	count=18500
+Total loss:	14.625 (rec:1.256, round:13.369)	b=3.12	count=19000
+Total loss:	1.944 (rec:1.246, round:0.698)	b=2.56	count=19500
+Total loss:	1.263 (rec:1.254, round:0.009)	b=2.00	count=20000
+finished reconstructing blocks.9.
+reconstructing blocks.10 ...
+initializing raw input and raw output ...
+initializing quanted input ...
+initializing perturbation hessian ...
+adaround training for blocks.10 ...
+wraping quantizers in blocks.10 ...
+Total loss:	2.000 (rec:2.000, round:0.000)	b=0.00	count=1
+Total loss:	1.424 (rec:1.424, round:0.000)	b=0.00	count=500
+Total loss:	1.188 (rec:1.188, round:0.000)	b=0.00	count=1000
+Total loss:	1.206 (rec:1.206, round:0.000)	b=0.00	count=1500
+Total loss:	1.092 (rec:1.092, round:0.000)	b=0.00	count=2000
+Total loss:	1.016 (rec:1.016, round:0.000)	b=0.00	count=2500
+Total loss:	1.020 (rec:1.020, round:0.000)	b=0.00	count=3000
+Total loss:	1.013 (rec:1.013, round:0.000)	b=0.00	count=3500
+Total loss:	65414.145 (rec:0.951, round:65413.195)	b=20.00	count=4000
+Total loss:	31645.402 (rec:0.925, round:31644.477)	b=19.44	count=4500
+Total loss:	29299.633 (rec:0.917, round:29298.715)	b=18.88	count=5000
+Total loss:	27777.887 (rec:0.926, round:27776.961)	b=18.31	count=5500
+Total loss:	26457.041 (rec:0.911, round:26456.129)	b=17.75	count=6000
+Total loss:	25220.092 (rec:0.915, round:25219.178)	b=17.19	count=6500
+Total loss:	24023.633 (rec:0.900, round:24022.732)	b=16.62	count=7000
+Total loss:	22848.566 (rec:0.874, round:22847.691)	b=16.06	count=7500
+Total loss:	21690.279 (rec:0.875, round:21689.404)	b=15.50	count=8000
+Total loss:	20538.176 (rec:0.852, round:20537.324)	b=14.94	count=8500
+Total loss:	19392.562 (rec:0.848, round:19391.715)	b=14.38	count=9000
+Total loss:	18241.340 (rec:0.863, round:18240.477)	b=13.81	count=9500
+Total loss:	17091.404 (rec:0.811, round:17090.594)	b=13.25	count=10000
+Total loss:	15943.842 (rec:0.854, round:15942.988)	b=12.69	count=10500
+Total loss:	14789.845 (rec:0.835, round:14789.010)	b=12.12	count=11000
+Total loss:	13640.353 (rec:0.820, round:13639.533)	b=11.56	count=11500
+Total loss:	12497.668 (rec:0.808, round:12496.860)	b=11.00	count=12000
+Total loss:	11360.112 (rec:0.819, round:11359.293)	b=10.44	count=12500
+Total loss:	10229.407 (rec:0.832, round:10228.575)	b=9.88	count=13000
+Total loss:	9113.459 (rec:0.830, round:9112.629)	b=9.31	count=13500
+Total loss:	8002.302 (rec:0.842, round:8001.460)	b=8.75	count=14000
+Total loss:	6908.417 (rec:0.841, round:6907.576)	b=8.19	count=14500
+Total loss:	5838.109 (rec:0.858, round:5837.251)	b=7.62	count=15000
+Total loss:	4792.715 (rec:0.851, round:4791.864)	b=7.06	count=15500
+Total loss:	3783.278 (rec:0.856, round:3782.422)	b=6.50	count=16000
+Total loss:	2837.254 (rec:0.846, round:2836.407)	b=5.94	count=16500
+Total loss:	1957.889 (rec:0.863, round:1957.026)	b=5.38	count=17000
+Total loss:	1194.136 (rec:0.840, round:1193.297)	b=4.81	count=17500
+Total loss:	591.189 (rec:0.824, round:590.365)	b=4.25	count=18000
+Total loss:	198.886 (rec:0.894, round:197.991)	b=3.69	count=18500
+Total loss:	35.305 (rec:0.853, round:34.452)	b=3.12	count=19000
+Total loss:	3.124 (rec:0.880, round:2.243)	b=2.56	count=19500
+Total loss:	0.886 (rec:0.850, round:0.035)	b=2.00	count=20000
+finished reconstructing blocks.10.
+reconstructing blocks.11 ...
+initializing raw input and raw output ...
+initializing quanted input ...
+initializing perturbation hessian ...
+adaround training for blocks.11 ...
+wraping quantizers in blocks.11 ...
+Total loss:	2.000 (rec:2.000, round:0.000)	b=0.00	count=1
+Total loss:	0.583 (rec:0.583, round:0.000)	b=0.00	count=500
+Total loss:	0.491 (rec:0.491, round:0.000)	b=0.00	count=1000
+Total loss:	0.487 (rec:0.487, round:0.000)	b=0.00	count=1500
+Total loss:	0.439 (rec:0.439, round:0.000)	b=0.00	count=2000
+Total loss:	0.466 (rec:0.466, round:0.000)	b=0.00	count=2500
+Total loss:	0.424 (rec:0.424, round:0.000)	b=0.00	count=3000
+Total loss:	0.396 (rec:0.396, round:0.000)	b=0.00	count=3500
+Total loss:	66180.406 (rec:0.424, round:66179.984)	b=20.00	count=4000
+Total loss:	32270.100 (rec:0.452, round:32269.648)	b=19.44	count=4500
+Total loss:	29989.074 (rec:0.383, round:29988.691)	b=18.88	count=5000
+Total loss:	28540.828 (rec:0.391, round:28540.438)	b=18.31	count=5500
+Total loss:	27326.453 (rec:0.367, round:27326.086)	b=17.75	count=6000
+Total loss:	26192.443 (rec:0.354, round:26192.090)	b=17.19	count=6500
+Total loss:	25096.920 (rec:0.349, round:25096.570)	b=16.62	count=7000
+Total loss:	24014.371 (rec:0.387, round:24013.984)	b=16.06	count=7500
+Total loss:	22929.803 (rec:0.379, round:22929.424)	b=15.50	count=8000
+Total loss:	21850.969 (rec:0.332, round:21850.637)	b=14.94	count=8500
+Total loss:	20759.291 (rec:0.314, round:20758.977)	b=14.38	count=9000
+Total loss:	19659.879 (rec:0.325, round:19659.553)	b=13.81	count=9500
+Total loss:	18551.668 (rec:0.315, round:18551.354)	b=13.25	count=10000
+Total loss:	17431.775 (rec:0.333, round:17431.443)	b=12.69	count=10500
+Total loss:	16290.862 (rec:0.325, round:16290.537)	b=12.12	count=11000
+Total loss:	15137.509 (rec:0.309, round:15137.200)	b=11.56	count=11500
+Total loss:	13975.443 (rec:0.324, round:13975.119)	b=11.00	count=12000
+Total loss:	12806.783 (rec:0.371, round:12806.412)	b=10.44	count=12500
+Total loss:	11626.826 (rec:0.339, round:11626.486)	b=9.88	count=13000
+Total loss:	10436.553 (rec:0.297, round:10436.256)	b=9.31	count=13500
+Total loss:	9244.809 (rec:0.271, round:9244.537)	b=8.75	count=14000
+Total loss:	8052.155 (rec:0.333, round:8051.822)	b=8.19	count=14500
+Total loss:	6871.608 (rec:0.303, round:6871.305)	b=7.62	count=15000
+Total loss:	5700.513 (rec:0.341, round:5700.172)	b=7.06	count=15500
+Total loss:	4556.614 (rec:0.292, round:4556.322)	b=6.50	count=16000
+Total loss:	3453.802 (rec:0.291, round:3453.511)	b=5.94	count=16500
+Total loss:	2411.550 (rec:0.297, round:2411.253)	b=5.38	count=17000
+Total loss:	1443.026 (rec:0.327, round:1442.700)	b=4.81	count=17500
+Total loss:	630.816 (rec:0.292, round:630.524)	b=4.25	count=18000
+Total loss:	157.599 (rec:0.320, round:157.279)	b=3.69	count=18500
+Total loss:	16.569 (rec:0.301, round:16.269)	b=3.12	count=19000
+Total loss:	0.909 (rec:0.325, round:0.584)	b=2.56	count=19500
+Total loss:	0.300 (rec:0.281, round:0.019)	b=2.00	count=20000
+finished reconstructing blocks.11.
+reconstructing head ...
+initializing raw input and raw output ...
+initializing quanted input ...
+initializing perturbation hessian ...
+adaround training for head ...
+wraping quantizers in head ...
+Total loss:	2.000 (rec:2.000, round:0.000)	b=0.00	count=1
+Total loss:	1.700 (rec:1.700, round:0.000)	b=0.00	count=500
+Total loss:	1.566 (rec:1.566, round:0.000)	b=0.00	count=1000
+Total loss:	1.323 (rec:1.323, round:0.000)	b=0.00	count=1500
+Total loss:	1.240 (rec:1.240, round:0.000)	b=0.00	count=2000
+Total loss:	1.268 (rec:1.268, round:0.000)	b=0.00	count=2500
+Total loss:	0.893 (rec:0.893, round:0.000)	b=0.00	count=3000
+Total loss:	0.817 (rec:0.817, round:0.000)	b=0.00	count=3500
+Total loss:	6946.829 (rec:0.869, round:6945.960)	b=20.00	count=4000
+Total loss:	3886.910 (rec:0.655, round:3886.255)	b=19.44	count=4500
+Total loss:	3609.937 (rec:0.675, round:3609.262)	b=18.88	count=5000
+Total loss:	3424.561 (rec:0.640, round:3423.921)	b=18.31	count=5500
+Total loss:	3265.525 (rec:0.409, round:3265.116)	b=17.75	count=6000
+Total loss:	3116.438 (rec:0.742, round:3115.696)	b=17.19	count=6500
+Total loss:	2970.354 (rec:0.374, round:2969.980)	b=16.62	count=7000
+Total loss:	2828.915 (rec:0.459, round:2828.456)	b=16.06	count=7500
+Total loss:	2688.108 (rec:0.472, round:2687.635)	b=15.50	count=8000
+Total loss:	2549.414 (rec:0.439, round:2548.975)	b=14.94	count=8500
+Total loss:	2411.217 (rec:0.335, round:2410.882)	b=14.38	count=9000
+Total loss:	2273.965 (rec:0.359, round:2273.606)	b=13.81	count=9500
+Total loss:	2139.170 (rec:0.383, round:2138.787)	b=13.25	count=10000
+Total loss:	2005.988 (rec:0.246, round:2005.742)	b=12.69	count=10500
+Total loss:	1873.833 (rec:0.367, round:1873.467)	b=12.12	count=11000
+Total loss:	1744.911 (rec:0.287, round:1744.625)	b=11.56	count=11500
+Total loss:	1617.114 (rec:0.271, round:1616.842)	b=11.00	count=12000
+Total loss:	1490.368 (rec:0.276, round:1490.092)	b=10.44	count=12500
+Total loss:	1362.177 (rec:0.289, round:1361.888)	b=9.88	count=13000
+Total loss:	1236.184 (rec:0.229, round:1235.956)	b=9.31	count=13500
+Total loss:	1112.976 (rec:0.195, round:1112.781)	b=8.75	count=14000
+Total loss:	988.875 (rec:0.209, round:988.667)	b=8.19	count=14500
+Total loss:	866.601 (rec:0.294, round:866.307)	b=7.62	count=15000
+Total loss:	744.877 (rec:0.248, round:744.629)	b=7.06	count=15500
+Total loss:	627.178 (rec:0.226, round:626.952)	b=6.50	count=16000
+Total loss:	511.035 (rec:0.223, round:510.812)	b=5.94	count=16500
+Total loss:	398.645 (rec:0.172, round:398.473)	b=5.38	count=17000
+Total loss:	292.787 (rec:0.257, round:292.530)	b=4.81	count=17500
+Total loss:	194.919 (rec:0.265, round:194.655)	b=4.25	count=18000
+Total loss:	109.883 (rec:0.255, round:109.628)	b=3.69	count=18500
+Total loss:	44.832 (rec:0.213, round:44.619)	b=3.12	count=19000
+Total loss:	9.409 (rec:0.192, round:9.217)	b=2.56	count=19500
+Total loss:	0.982 (rec:0.303, round:0.680)	b=2.00	count=20000
+finished reconstructing head.
+2025-09-08 05:40:03 - hessian_perturb guided block reconstruction finished.
+Saving checkpoint to ./checkpoint/quant_result/20250908_0204/vit_base_w2_a2_optimsize_1024_hessian_perturb_qdrop.pth
+Validating on calibration set after block reconstruction ...
+Test: [0/32]	Time 0.841 (0.841)	Loss 1.6341 (1.6341)	Prec@1 81.250 (81.250)	Prec@5 90.625 (90.625)
+Test: [10/32]	Time 0.076 (0.145)	Loss 1.4218 (1.5728)	Prec@1 78.125 (80.682)	Prec@5 90.625 (91.761)
+Test: [20/32]	Time 0.076 (0.112)	Loss 1.4666 (1.5721)	Prec@1 84.375 (79.911)	Prec@5 96.875 (92.560)
+Test: [30/32]	Time 0.076 (0.100)	Loss 1.9069 (1.5434)	Prec@1 78.125 (81.149)	Prec@5 87.500 (92.540)
+ * Prec@1 81.445 Prec@5 92.676 Loss 1.527 Time 3.343
+Validating on test set after block reconstruction ...
+Test: [0/100]	Time 5.062 (5.062)	Loss 6.2298 (6.2298)	Prec@1 4.400 (4.400)	Prec@5 12.600 (12.600)
+Test: [10/100]	Time 1.655 (1.967)	Loss 5.9701 (5.9958)	Prec@1 6.200 (5.727)	Prec@5 16.400 (15.309)
+Test: [20/100]	Time 1.658 (1.820)	Loss 5.2852 (5.7452)	Prec@1 8.800 (7.029)	Prec@5 27.200 (19.695)
+Test: [30/100]	Time 1.661 (1.769)	Loss 5.5973 (5.6346)	Prec@1 7.000 (7.600)	Prec@5 20.600 (21.077)
+Test: [40/100]	Time 1.660 (1.743)	Loss 6.1753 (5.7836)	Prec@1 3.600 (6.898)	Prec@5 12.600 (18.888)
+Test: [50/100]	Time 1.660 (1.727)	Loss 6.2578 (5.8711)	Prec@1 3.000 (6.416)	Prec@5 11.800 (17.635)
+Test: [60/100]	Time 1.659 (1.716)	Loss 6.1506 (5.9439)	Prec@1 8.000 (6.180)	Prec@5 12.600 (16.675)
+Test: [70/100]	Time 1.659 (1.708)	Loss 6.3885 (5.9931)	Prec@1 2.200 (5.848)	Prec@5 8.400 (15.907)
+Test: [80/100]	Time 1.657 (1.702)	Loss 6.5827 (6.0513)	Prec@1 2.400 (5.499)	Prec@5 7.600 (15.086)
+Test: [90/100]	Time 1.664 (1.698)	Loss 6.2308 (6.0823)	Prec@1 7.000 (5.376)	Prec@5 13.800 (14.640)
+ * Prec@1 5.638 Prec@5 15.028 Loss 6.066 Time 169.667
+2025-09-08 05:42:57 - finished the process.
+Extracting logits from quantized and full-precision models...
+Testing combinations:
+  Alpha values: [0.5]
+  Cluster numbers: [1, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256]
+  PCA dimensions: [50]
+
+============================================================
+Testing: alpha=0.5, clusters=1, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 4.76%
+[Alpha=0.50] Top-5 Accuracy: 13.68%
+Result: Top-1: 4.76%, Top-5: 13.68%
+
+============================================================
+Testing: alpha=0.5, clusters=8, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 4.05%
+[Alpha=0.50] Top-5 Accuracy: 13.46%
+Result: Top-1: 4.05%, Top-5: 13.46%
+
+============================================================
+Testing: alpha=0.5, clusters=16, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 4.03%
+[Alpha=0.50] Top-5 Accuracy: 13.48%
+Result: Top-1: 4.03%, Top-5: 13.48%
+
+============================================================
+Testing: alpha=0.5, clusters=24, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.85%
+[Alpha=0.50] Top-5 Accuracy: 13.44%
+Result: Top-1: 3.85%, Top-5: 13.44%
+
+============================================================
+Testing: alpha=0.5, clusters=32, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.82%
+[Alpha=0.50] Top-5 Accuracy: 13.36%
+Result: Top-1: 3.82%, Top-5: 13.36%
+
+============================================================
+Testing: alpha=0.5, clusters=40, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.69%
+[Alpha=0.50] Top-5 Accuracy: 13.33%
+Result: Top-1: 3.69%, Top-5: 13.33%
+
+============================================================
+Testing: alpha=0.5, clusters=48, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.72%
+[Alpha=0.50] Top-5 Accuracy: 13.29%
+Result: Top-1: 3.72%, Top-5: 13.29%
+
+============================================================
+Testing: alpha=0.5, clusters=56, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.70%
+[Alpha=0.50] Top-5 Accuracy: 13.34%
+Result: Top-1: 3.70%, Top-5: 13.34%
+
+============================================================
+Testing: alpha=0.5, clusters=64, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.49%
+[Alpha=0.50] Top-5 Accuracy: 13.35%
+Result: Top-1: 3.49%, Top-5: 13.35%
+
+============================================================
+Testing: alpha=0.5, clusters=72, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.72%
+[Alpha=0.50] Top-5 Accuracy: 13.35%
+Result: Top-1: 3.72%, Top-5: 13.35%
+
+============================================================
+Testing: alpha=0.5, clusters=80, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.74%
+[Alpha=0.50] Top-5 Accuracy: 13.46%
+Result: Top-1: 3.74%, Top-5: 13.46%
+
+============================================================
+Testing: alpha=0.5, clusters=88, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.71%
+[Alpha=0.50] Top-5 Accuracy: 13.28%
+Result: Top-1: 3.71%, Top-5: 13.28%
+
+============================================================
+Testing: alpha=0.5, clusters=96, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.69%
+[Alpha=0.50] Top-5 Accuracy: 13.31%
+Result: Top-1: 3.69%, Top-5: 13.31%
+
+============================================================
+Testing: alpha=0.5, clusters=104, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.56%
+[Alpha=0.50] Top-5 Accuracy: 13.28%
+Result: Top-1: 3.56%, Top-5: 13.28%
+
+============================================================
+Testing: alpha=0.5, clusters=112, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.57%
+[Alpha=0.50] Top-5 Accuracy: 13.21%
+Result: Top-1: 3.57%, Top-5: 13.21%
+
+============================================================
+Testing: alpha=0.5, clusters=120, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.54%
+[Alpha=0.50] Top-5 Accuracy: 13.27%
+Result: Top-1: 3.54%, Top-5: 13.27%
+
+============================================================
+Testing: alpha=0.5, clusters=128, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.51%
+[Alpha=0.50] Top-5 Accuracy: 13.28%
+Result: Top-1: 3.51%, Top-5: 13.28%
+
+============================================================
+Testing: alpha=0.5, clusters=136, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.47%
+[Alpha=0.50] Top-5 Accuracy: 13.24%
+Result: Top-1: 3.47%, Top-5: 13.24%
+
+============================================================
+Testing: alpha=0.5, clusters=144, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.53%
+[Alpha=0.50] Top-5 Accuracy: 13.15%
+Result: Top-1: 3.53%, Top-5: 13.15%
+
+============================================================
+Testing: alpha=0.5, clusters=152, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.60%
+[Alpha=0.50] Top-5 Accuracy: 13.29%
+Result: Top-1: 3.60%, Top-5: 13.29%
+
+============================================================
+Testing: alpha=0.5, clusters=160, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.70%
+[Alpha=0.50] Top-5 Accuracy: 13.37%
+Result: Top-1: 3.70%, Top-5: 13.37%
+
+============================================================
+Testing: alpha=0.5, clusters=168, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.55%
+[Alpha=0.50] Top-5 Accuracy: 13.28%
+Result: Top-1: 3.55%, Top-5: 13.28%
+
+============================================================
+Testing: alpha=0.5, clusters=176, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.58%
+[Alpha=0.50] Top-5 Accuracy: 13.32%
+Result: Top-1: 3.58%, Top-5: 13.32%
+
+============================================================
+Testing: alpha=0.5, clusters=184, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.60%
+[Alpha=0.50] Top-5 Accuracy: 13.16%
+Result: Top-1: 3.60%, Top-5: 13.16%
+
+============================================================
+Testing: alpha=0.5, clusters=192, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.53%
+[Alpha=0.50] Top-5 Accuracy: 13.20%
+Result: Top-1: 3.53%, Top-5: 13.20%
+
+============================================================
+Testing: alpha=0.5, clusters=200, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.59%
+[Alpha=0.50] Top-5 Accuracy: 13.21%
+Result: Top-1: 3.59%, Top-5: 13.21%
+
+============================================================
+Testing: alpha=0.5, clusters=208, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.58%
+[Alpha=0.50] Top-5 Accuracy: 13.14%
+Result: Top-1: 3.58%, Top-5: 13.14%
+
+============================================================
+Testing: alpha=0.5, clusters=216, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.56%
+[Alpha=0.50] Top-5 Accuracy: 13.18%
+Result: Top-1: 3.56%, Top-5: 13.18%
+
+============================================================
+Testing: alpha=0.5, clusters=224, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.56%
+[Alpha=0.50] Top-5 Accuracy: 13.07%
+Result: Top-1: 3.56%, Top-5: 13.07%
+
+============================================================
+Testing: alpha=0.5, clusters=232, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.61%
+[Alpha=0.50] Top-5 Accuracy: 13.12%
+Result: Top-1: 3.61%, Top-5: 13.12%
+
+============================================================
+Testing: alpha=0.5, clusters=240, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.53%
+[Alpha=0.50] Top-5 Accuracy: 13.08%
+Result: Top-1: 3.53%, Top-5: 13.08%
+
+============================================================
+Testing: alpha=0.5, clusters=248, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.54%
+[Alpha=0.50] Top-5 Accuracy: 13.06%
+Result: Top-1: 3.54%, Top-5: 13.06%
+
+============================================================
+Testing: alpha=0.5, clusters=256, pca_dim=50
+============================================================
+[Alpha=0.50] Top-1 Accuracy: 3.60%
+[Alpha=0.50] Top-5 Accuracy: 13.10%
+Result: Top-1: 3.60%, Top-5: 13.10%
+
+================================================================================
+SUMMARY OF ALL RESULTS
+================================================================================
+Alpha    Clusters   PCA_dim    Top-1      Top-5     
+--------------------------------------------------
+0.50     1          50         4.76       13.68     
+0.50     8          50         4.05       13.46     
+0.50     16         50         4.03       13.48     
+0.50     24         50         3.85       13.44     
+0.50     32         50         3.82       13.36     
+0.50     40         50         3.69       13.33     
+0.50     48         50         3.72       13.29     
+0.50     56         50         3.70       13.34     
+0.50     64         50         3.49       13.35     
+0.50     72         50         3.72       13.35     
+0.50     80         50         3.74       13.46     
+0.50     88         50         3.71       13.28     
+0.50     96         50         3.69       13.31     
+0.50     104        50         3.56       13.28     
+0.50     112        50         3.57       13.21     
+0.50     120        50         3.54       13.27     
+0.50     128        50         3.51       13.28     
+0.50     136        50         3.47       13.24     
+0.50     144        50         3.53       13.15     
+0.50     152        50         3.60       13.29     
+0.50     160        50         3.70       13.37     
+0.50     168        50         3.55       13.28     
+0.50     176        50         3.58       13.32     
+0.50     184        50         3.60       13.16     
+0.50     192        50         3.53       13.20     
+0.50     200        50         3.59       13.21     
+0.50     208        50         3.58       13.14     
+0.50     216        50         3.56       13.18     
+0.50     224        50         3.56       13.07     
+0.50     232        50         3.61       13.12     
+0.50     240        50         3.53       13.08     
+0.50     248        50         3.54       13.06     
+0.50     256        50         3.60       13.10     
+
+BEST RESULT:
+  Alpha: 0.5
+  Clusters: 1
+  PCA_dim: 50
+  Top-1 Accuracy: 4.76%
+  Top-5 Accuracy: 13.68%
+2025-09-08 08:01:03,951 - INFO - Experiment for seed 1001 completed in 21392.25 seconds
+2025-09-08 08:01:03,952 - INFO - SUCCESS: Experiment for seed 1001 completed successfully
+2025-09-08 08:01:03,956 - INFO - Looking for results in: ./checkpoint/quant_result/20250908_0758
+2025-09-08 08:01:03,960 - INFO - Parsed 0 reconstructed results from log file for seed 1001
+2025-09-08 08:01:03,960 - INFO - Parsed 0 baseline results from log file for seed 1001
+2025-09-08 08:01:03,960 - INFO - Seed 1001 completed successfully
+2025-09-08 08:01:03,960 - INFO - Sleeping for 0.5 seconds before next seed...
+2025-09-08 08:01:04,461 - INFO - 
+============================================================
+2025-09-08 08:01:04,461 - INFO - Running experiment 2/3 for seed 1002
+2025-09-08 08:01:04,461 - INFO - ============================================================
+2025-09-08 08:01:04,462 - INFO - Running experiment for seed 1002
+2025-09-08 08:01:04,462 - INFO - Command: /home/alz07xz/project/PD-Quant/pd_quant/bin/python ../test_quant.py --model vit_base --w_bit 2 --a_bit 2 --seed 1002 --config ./../configs/4bit/best.py --dataset /home/alz07xz/imagenet --calib-size 1000 --calib-batch-size 32 --val-batch-size 500 --num-workers 8 --device cuda --alpha-list 0.5 --num-clusters-list 1 8 16 24 32 40 48 56 64 72 80 88 96 104 112 120 128 136 144 152 160 168 176 184 192 200 208 216 224 232 240 248 256 --pca-dim-list 50 --calibrate --optimize
+2025-09-08 08:01:04,462 - INFO - Working directory: /home/alz07xz/project/APHQ_CAT/ablate_clusters
+2025-09-08 08:01:14 - start the process.
+Namespace(model='vit_base', config='./../configs/4bit/best.py', dataset='/home/alz07xz/imagenet', val_batch_size=500, num_workers=8, device='cuda', reconstruct_mlp=False, load_reconstruct_checkpoint=False, test_reconstruct_checkpoint=False, calibrate=True, load_calibrate_checkpoint=None, test_calibrate_checkpoint=False, optimize=True, load_optimize_checkpoint='', test_optimize_checkpoint=False, print_freq=10, seed=1002, alpha_list=[0.5], num_clusters_list=[1, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256], pca_dim_list=[50], w_bit=2, a_bit=2, calib_size=1000, calib_batch_size=32)
+deefe /home/alz07xz/project/APHQ_CAT/configs/4bit
+Successfully imported Config class!
+optim_size: 1024
+calib_size: 1000
+optim_batch_size: 32
+calib_batch_size: 32
+w_bit: 2
+a_bit: 2
+qconv_a_bit: 8
+qhead_a_bit: 4
+calib_metric: mse
+matmul_head_channel_wise: True
+token_channel_wise: False
+eq_n: 128
+search_round: 3
+keep_gpu: True
+optim_metric: hessian_perturb
+use_mean_hessian: True
+temp: 20
+recon_metric: hessian_perturb
+pct: 0.98
+optim_mode: qdrop
+drop_prob: 0.5
+reconstruct_mlp: False
+Building model ...
+No checkpoint found at './checkpoint/vit_raw/vit_base_patch16_224.bin'
+Loading pretrained weights from Hugging Face hub (timm/vit_base_patch16_224.augreg2_in21k_ft_in1k)
+[timm/vit_base_patch16_224.augreg2_in21k_ft_in1k] Safe alternative available for 'pytorch_model.bin' (as 'model.safetensors'). Loading weights using safetensors.
+Building validation dataloader ...
+Validating on test set on fp ...
+Test: [0/100]	Time 8.366 (8.366)	Loss 0.4459 (0.4459)	Prec@1 91.400 (91.400)	Prec@5 98.600 (98.600)
+Test: [10/100]	Time 0.774 (1.707)	Loss 0.4659 (0.5379)	Prec@1 90.800 (88.455)	Prec@5 98.600 (98.345)
+Test: [20/100]	Time 0.782 (1.286)	Loss 0.6057 (0.5588)	Prec@1 85.800 (88.124)	Prec@5 98.600 (98.095)
+Test: [30/100]	Time 0.794 (1.228)	Loss 0.5066 (0.5820)	Prec@1 89.800 (87.471)	Prec@5 99.600 (98.045)
+Test: [40/100]	Time 2.003 (1.151)	Loss 0.7571 (0.5772)	Prec@1 81.400 (87.532)	Prec@5 97.000 (98.088)
+Test: [50/100]	Time 0.790 (1.102)	Loss 1.0069 (0.6165)	Prec@1 77.000 (86.384)	Prec@5 95.200 (97.827)
+Test: [60/100]	Time 0.801 (1.053)	Loss 0.5700 (0.6205)	Prec@1 89.200 (86.285)	Prec@5 97.200 (97.751)
+Test: [70/100]	Time 0.802 (1.034)	Loss 0.7296 (0.6361)	Prec@1 83.800 (85.673)	Prec@5 97.400 (97.654)
+Test: [80/100]	Time 2.190 (1.022)	Loss 0.5101 (0.6392)	Prec@1 88.400 (85.605)	Prec@5 98.000 (97.580)
+Test: [90/100]	Time 0.801 (0.998)	Loss 0.9420 (0.6541)	Prec@1 75.000 (85.062)	Prec@5 95.800 (97.495)
+ * Prec@1 85.102 Prec@5 97.526 Loss 0.652 Time 102.520
+Wraping quantiztion modules (reparam: False, recon: False) ...
+2025-09-08 08:03:26 - start mse guided calibration
+  0%|          | 0/74 [00:00<?, ?it/s]calibrating patch_embed.proj:   0%|          | 0/74 [00:00<?, ?it/s]calibrating patch_embed.proj:   1%|▏         | 1/74 [00:11<14:18, 11.76s/it]calibrating blocks.0.attn.qkv:   1%|▏         | 1/74 [00:11<14:18, 11.76s/it]calibrating blocks.0.attn.qkv:   3%|▎         | 2/74 [01:25<57:38, 48.04s/it]calibrating blocks.0.attn.proj:   3%|▎         | 2/74 [01:25<57:38, 48.04s/it]calibrating blocks.0.attn.proj:   4%|▍         | 3/74 [01:50<44:31, 37.63s/it]calibrating blocks.0.attn.matmul1:   4%|▍         | 3/74 [01:50<44:31, 37.63s/it]calibrating blocks.0.attn.matmul1:   5%|▌         | 4/74 [03:01<59:26, 50.94s/it]calibrating blocks.0.attn.matmul2:   5%|▌         | 4/74 [03:01<59:26, 50.94s/it]calibrating blocks.0.attn.matmul2:   7%|▋         | 5/74 [04:02<1:02:36, 54.44s/it]calibrating blocks.0.mlp.fc1:   7%|▋         | 5/74 [04:02<1:02:36, 54.44s/it]     calibrating blocks.0.mlp.fc1:   8%|▊         | 6/74 [05:54<1:23:49, 73.96s/it]calibrating blocks.0.mlp.fc2:   8%|▊         | 6/74 [05:54<1:23:49, 73.96s/it]calibrating blocks.0.mlp.fc2:   9%|▉         | 7/74 [07:48<1:37:18, 87.14s/it]calibrating blocks.1.attn.qkv:   9%|▉         | 7/74 [07:48<1:37:18, 87.14s/it]calibrating blocks.1.attn.qkv:  11%|█         | 8/74 [09:04<1:31:49, 83.48s/it]calibrating blocks.1.attn.proj:  11%|█         | 8/74 [09:04<1:31:49, 83.48s/it]calibrating blocks.1.attn.proj:  12%|█▏        | 9/74 [09:30<1:11:06, 65.64s/it]calibrating blocks.1.attn.matmul1:  12%|█▏        | 9/74 [09:30<1:11:06, 65.64s/it]calibrating blocks.1.attn.matmul1:  14%|█▎        | 10/74 [10:42<1:12:12, 67.70s/it]calibrating blocks.1.attn.matmul2:  14%|█▎        | 10/74 [10:42<1:12:12, 67.70s/it]calibrating blocks.1.attn.matmul2:  15%|█▍        | 11/74 [11:44<1:08:58, 65.69s/it]calibrating blocks.1.mlp.fc1:  15%|█▍        | 11/74 [11:44<1:08:58, 65.69s/it]     calibrating blocks.1.mlp.fc1:  16%|█▌        | 12/74 [13:36<1:22:42, 80.04s/it]calibrating blocks.1.mlp.fc2:  16%|█▌        | 12/74 [13:36<1:22:42, 80.04s/it]calibrating blocks.1.mlp.fc2:  18%|█▊        | 13/74 [15:32<1:32:14, 90.74s/it]calibrating blocks.2.attn.qkv:  18%|█▊        | 13/74 [15:32<1:32:14, 90.74s/it]calibrating blocks.2.attn.qkv:  19%|█▉        | 14/74 [16:48<1:26:16, 86.28s/it]calibrating blocks.2.attn.proj:  19%|█▉        | 14/74 [16:48<1:26:16, 86.28s/it]calibrating blocks.2.attn.proj:  20%|██        | 15/74 [17:14<1:06:56, 68.07s/it]calibrating blocks.2.attn.matmul1:  20%|██        | 15/74 [17:14<1:06:56, 68.07s/it]calibrating blocks.2.attn.matmul1:  22%|██▏       | 16/74 [18:25<1:06:47, 69.10s/it]calibrating blocks.2.attn.matmul2:  22%|██▏       | 16/74 [18:25<1:06:47, 69.10s/it]calibrating blocks.2.attn.matmul2:  23%|██▎       | 17/74 [19:26<1:03:14, 66.57s/it]calibrating blocks.2.mlp.fc1:  23%|██▎       | 17/74 [19:26<1:03:14, 66.57s/it]     calibrating blocks.2.mlp.fc1:  24%|██▍       | 18/74 [21:19<1:15:11, 80.56s/it]calibrating blocks.2.mlp.fc2:  24%|██▍       | 18/74 [21:19<1:15:11, 80.56s/it]calibrating blocks.2.mlp.fc2:  26%|██▌       | 19/74 [23:14<1:23:23, 90.97s/it]calibrating blocks.3.attn.qkv:  26%|██▌       | 19/74 [23:14<1:23:23, 90.97s/it]calibrating blocks.3.attn.qkv:  27%|██▋       | 20/74 [24:30<1:17:44, 86.37s/it]calibrating blocks.3.attn.proj:  27%|██▋       | 20/74 [24:30<1:17:44, 86.37s/it]calibrating blocks.3.attn.proj:  28%|██▊       | 21/74 [24:56<1:00:25, 68.41s/it]calibrating blocks.3.attn.matmul1:  28%|██▊       | 21/74 [24:56<1:00:25, 68.41s/it]calibrating blocks.3.attn.matmul1:  30%|██▉       | 22/74 [26:09<1:00:21, 69.64s/it]calibrating blocks.3.attn.matmul2:  30%|██▉       | 22/74 [26:09<1:00:21, 69.64s/it]calibrating blocks.3.attn.matmul2:  31%|███       | 23/74 [27:10<57:03, 67.13s/it]  calibrating blocks.3.mlp.fc1:  31%|███       | 23/74 [27:10<57:03, 67.13s/it]     calibrating blocks.3.mlp.fc1:  32%|███▏      | 24/74 [29:04<1:07:30, 81.02s/it]calibrating blocks.3.mlp.fc2:  32%|███▏      | 24/74 [29:04<1:07:30, 81.02s/it]calibrating blocks.3.mlp.fc2:  34%|███▍      | 25/74 [30:59<1:14:37, 91.38s/it]calibrating blocks.4.attn.qkv:  34%|███▍      | 25/74 [30:59<1:14:37, 91.38s/it]calibrating blocks.4.attn.qkv:  35%|███▌      | 26/74 [32:15<1:09:24, 86.76s/it]calibrating blocks.4.attn.proj:  35%|███▌      | 26/74 [32:15<1:09:24, 86.76s/it]calibrating blocks.4.attn.proj:  36%|███▋      | 27/74 [32:42<53:51, 68.75s/it]  calibrating blocks.4.attn.matmul1:  36%|███▋      | 27/74 [32:42<53:51, 68.75s/it]calibrating blocks.4.attn.matmul1:  38%|███▊      | 28/74 [33:53<53:18, 69.52s/it]calibrating blocks.4.attn.matmul2:  38%|███▊      | 28/74 [33:53<53:18, 69.52s/it]calibrating blocks.4.attn.matmul2:  39%|███▉      | 29/74 [34:54<50:05, 66.80s/it]calibrating blocks.4.mlp.fc1:  39%|███▉      | 29/74 [34:54<50:05, 66.80s/it]     calibrating blocks.4.mlp.fc1:  41%|████      | 30/74 [36:46<59:06, 80.61s/it]calibrating blocks.4.mlp.fc2:  41%|████      | 30/74 [36:46<59:06, 80.61s/it]calibrating blocks.4.mlp.fc2:  42%|████▏     | 31/74 [38:41<1:05:09, 90.92s/it]calibrating blocks.5.attn.qkv:  42%|████▏     | 31/74 [38:41<1:05:09, 90.92s/it]calibrating blocks.5.attn.qkv:  43%|████▎     | 32/74 [39:57<1:00:24, 86.31s/it]calibrating blocks.5.attn.proj:  43%|████▎     | 32/74 [39:57<1:00:24, 86.31s/it]calibrating blocks.5.attn.proj:  45%|████▍     | 33/74 [40:24<46:44, 68.40s/it]  calibrating blocks.5.attn.matmul1:  45%|████▍     | 33/74 [40:24<46:44, 68.40s/it]calibrating blocks.5.attn.matmul1:  46%|████▌     | 34/74 [41:36<46:23, 69.60s/it]calibrating blocks.5.attn.matmul2:  46%|████▌     | 34/74 [41:36<46:23, 69.60s/it]calibrating blocks.5.attn.matmul2:  47%|████▋     | 35/74 [42:37<43:36, 67.10s/it]calibrating blocks.5.mlp.fc1:  47%|████▋     | 35/74 [42:37<43:36, 67.10s/it]     calibrating blocks.5.mlp.fc1:  49%|████▊     | 36/74 [44:31<51:17, 80.99s/it]calibrating blocks.5.mlp.fc2:  49%|████▊     | 36/74 [44:31<51:17, 80.99s/it]slurmstepd-jnfat06: error: *** JOB 1637379 ON jnfat06 CANCELLED AT 2025-09-08T08:49:20 ***
