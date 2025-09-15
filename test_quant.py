@@ -8,6 +8,7 @@ import importlib
 import timm
 import copy
 import time
+import pandas as pd
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
 from sklearn.manifold import TSNE
@@ -395,6 +396,54 @@ def main(args):
             corrected.append(blended)
         return torch.stack(corrected)
     
+    def save_logits_to_csv(all_q_logits, all_fp_logits, all_corrected_logits, all_cluster_ids, 
+                          alpha, num_clusters, pca_dim, model_name, root_path):
+        """
+        Save logits data to CSV files.
+        """
+        # Concatenate all batches
+        q_logits = torch.cat(all_q_logits, dim=0).numpy()
+        fp_logits = torch.cat(all_fp_logits, dim=0).numpy()
+        corrected_logits = torch.cat(all_corrected_logits, dim=0).numpy()
+        cluster_ids = np.concatenate(all_cluster_ids, axis=0)
+        
+        # Create filename with parameters
+        filename = f"{model_name}_logits_alpha{alpha}_clusters{num_clusters}_pca{pca_dim}.csv"
+        filepath = os.path.join(root_path, filename)
+        
+        # Create DataFrame with logits data
+        num_samples = q_logits.shape[0]
+        num_classes = q_logits.shape[1]
+        
+        # Create column names
+        q_cols = [f'q_logit_{i}' for i in range(num_classes)]
+        fp_cols = [f'fp_logit_{i}' for i in range(num_classes)]
+        corrected_cols = [f'corrected_logit_{i}' for i in range(num_classes)]
+        
+        # Combine all data
+        data = {}
+        data['sample_id'] = range(num_samples)
+        data['cluster_id'] = cluster_ids
+        
+        # Add quantized logits
+        for i, col in enumerate(q_cols):
+            data[col] = q_logits[:, i]
+        
+        # Add full-precision logits
+        for i, col in enumerate(fp_cols):
+            data[col] = fp_logits[:, i]
+        
+        # Add corrected logits
+        for i, col in enumerate(corrected_cols):
+            data[col] = corrected_logits[:, i]
+        
+        # Create DataFrame and save
+        df = pd.DataFrame(data)
+        df.to_csv(filepath, index=False)
+        
+        print(f"Logits saved to: {filepath}")
+        return filepath
+    
     def evaluate_cluster_affine_with_alpha(q_model, fp_model, cluster_model, gamma_dict, beta_dict, dataloader, device, pca=None, alpha=0.4):
         q_model.eval()
         fp_model.eval()
@@ -434,8 +483,8 @@ def main(args):
         print(f"[Alpha={alpha:.2f}] Top-1 Accuracy: {total_top1 / total:.2f}%")
         print(f"[Alpha={alpha:.2f}] Top-5 Accuracy: {total_top5 / total:.2f}%")
         
-        # Plot randomly selected values from each cluster
-        return total_top1 / total, total_top5 / total
+        # Return accuracy and logits data
+        return total_top1 / total, total_top5 / total, all_q_logits, all_fp_logits, all_corrected_logits, all_cluster_ids
         
     
     print("Extracting logits from quantized and full-precision models...")
@@ -478,9 +527,15 @@ def main(args):
                 )
                 
                 # Evaluate with current parameters
-                top1_acc, top5_acc = evaluate_cluster_affine_with_alpha(
+                top1_acc, top5_acc, all_q_logits, all_fp_logits, all_corrected_logits, all_cluster_ids = evaluate_cluster_affine_with_alpha(
                     model, full_model, cluster_model, gamma_dict, beta_dict, val_loader, "cuda", 
                     pca=pca, alpha=alpha
+                )
+                
+                # Save logits to CSV
+                csv_filepath = save_logits_to_csv(
+                    all_q_logits, all_fp_logits, all_corrected_logits, all_cluster_ids,
+                    alpha, num_clusters, pca_dim, args.model, root_path
                 )
                 
                 # Store results
@@ -489,7 +544,8 @@ def main(args):
                     'num_clusters': num_clusters,
                     'pca_dim': pca_dim,
                     'top1_accuracy': top1_acc,
-                    'top5_accuracy': top5_acc
+                    'top5_accuracy': top5_acc,
+                    'csv_filepath': csv_filepath
                 }
                 results.append(result)
                 
@@ -515,7 +571,11 @@ def main(args):
     print(f"  Top-1 Accuracy: {best_result['top1_accuracy']:.2f}%")
     print(f"  Top-5 Accuracy: {best_result['top5_accuracy']:.2f}%")
     
-    # Create summary CSV of all saved logits files
+    # Create summary CSV of all results and logits files
+    summary_df = pd.DataFrame(results)
+    summary_filepath = os.path.join(root_path, f"{args.model}_experiment_summary.csv")
+    summary_df.to_csv(summary_filepath, index=False)
+    print(f"\nExperiment summary saved to: {summary_filepath}")
     
     
 if __name__ == "__main__":
