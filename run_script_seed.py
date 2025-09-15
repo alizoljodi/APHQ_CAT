@@ -130,6 +130,7 @@ def run_single_experiment(args, seed, output_dir):
     
     # Run the command using os.system
     start_time = time.time()
+    print("grgregregre")
     returncode = os.system(cmd)
     end_time = time.time()
     execution_time = end_time - start_time
